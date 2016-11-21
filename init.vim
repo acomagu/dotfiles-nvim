@@ -22,8 +22,18 @@ call dein#add('Shougo/unite-outline')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('fatih/vim-go')
 call dein#add('zchee/deoplete-go', {'build': 'make'})
-  call dein#add('nsf/gocode')
-call dein#add('benekastah/neomake')
+call dein#add('nsf/gocode')
+call dein#add('neomake/neomake')
+call dein#add('carlitux/deoplete-ternjs', {'build': 'npm install -g tern'})
+call dein#add('zchee/deoplete-clang')
+call dein#add('ianks/vim-tsx')
+call dein#add('HerringtonDarkholme/yats.vim')
+call dein#add('mhartington/deoplete-typescript')
+" call dein#local('~/dev/deoplete-typescript', {'frozen': 1})
+call dein#add('kmnk/vim-unite-giti')
+call dein#add('tpope/vim-fugitive')
+call dein#add('artur-shaik/vim-javacomplete2')
+call dein#add('leafgarland/typescript-vim')
 
 call dein#end()
 filetype plugin indent on
@@ -34,6 +44,21 @@ endif
 let g:python3_host_prog  = '/usr/bin/python3'
 
 " neomake
+let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_cpp_clang_maker = {
+      \ 'exe': 'clang++',
+      \ 'args': ['-I/home/yuki/.linuxbrew/include', '-std=c++0x'],
+      \ }
+
+" function! s:neomake_except_typescript()
+"     if &filetype !~ 'typescript'
+"       Neomake
+"     endif
+" endfunction
+" augroup neomake_when_save
+"     autocmd!
+"     autocmd BufWritePre * call s:neomake_except_typescript()
+" augroup END
 autocmd! BufWritePost * Neomake
 
 " vim-go
@@ -54,46 +79,44 @@ let g:deoplete#sources#go#package_dot = 1
 let mapleader = "\<Space>"
 
 " deoplete
-if dein#is_sourced('deoplete.nvim')
-  let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
-  let g:acp_enableAtStartup = 0
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
-  let g:deoplete#sources#syntax#min_keyword_length = 3
-  let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
-  let g:deoplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-  \ }
-  if !exists('g:deoplete_keyword_patterns')
-      let g:deoplete#keyword_patterns = {}
-  endif
-  let g:deoplete#keyword_patterns['default'] = '\h\w*'
-  inoremap <expr><C-g>     deoplete#undo_completion()
-  inoremap <expr><C-l>     deoplete#complete_common_string()
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  endfunction
-  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  if !exists('g:deoplete#sources#omni#input_patterns')
-    let g:deoplete#sources#omni#input_patterns = {}
-  endif
-  let g:deoplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:acp_enableAtStartup = 0
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#sources#syntax#min_keyword_length = 0
+let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
+let g:deoplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+      \ }
+if !exists('g:deoplete_keyword_patterns')
+  let g:deoplete#keyword_patterns = {}
 endif
+let g:deoplete#keyword_patterns['default'] = '\h\w*'
+inoremap <expr><C-g>     deoplete#undo_completion()
+inoremap <expr><C-l>     deoplete#complete_common_string()
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+endfunction
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd BufEnter *.tsx set filetype=typescript
+if !exists('g:deoplete#sources#omni#input_patterns')
+  let g:deoplete#sources#omni#input_patterns = {}
+endif
+let g:deoplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " vim-submode
 let g:submode_keep_leaving_key = 1
 let g:submode_timeout = 0
-command! -nargs=+ -bang -complete=file Rename let pbnr=fnamemodify(bufname('%'), ':p')|exec 'f '.escape(<q-args>, ' ')|w<bang>|call delete(pbnr)duo-
 call submode#enter_with('winsize', 'n', '', '<C-w>>', '<C-w>>')
 call submode#enter_with('winsize', 'n', '', '<C-w><', '<C-w><')
 call submode#enter_with('winsize', 'n', '', '<C-w>+', '<C-w>-')
@@ -115,8 +138,29 @@ nnoremap <Leader>u :Unite<CR>
 nnoremap <Leader>p :Unite file_rec<CR>
 let g:unite_enable_start_insert=1
 
-" other custom keymaps
+" deoplete-turnjs
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 
+" go-vim
+let g:go_template_autocreate = 0
+
+" vim-clang
+" let g:clang_cpp_options = '-std=c++0x -stdlib=libc++'
+let g:clang_cpp_options = '-std=c++0x -I /home/yuki/.linuxbrew/include'
+
+" deoplete-clang
+let g:deoplete#sources#clang#libclang_path = '/home/yuki/.linuxbrew/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/home/yuki/.linuxbrew/lib/clang'
+let g:deoplete#sources#clang#flags = [
+      \ "-std=c++0x",
+      \ "-I/home/yuki/.linuxbrew/include"
+      \ ]
+
+" javacomplete2
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" other custom keymaps
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>q ZZ
