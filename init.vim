@@ -34,6 +34,7 @@ call dein#add('kmnk/vim-unite-giti')
 call dein#add('tpope/vim-fugitive')
 call dein#add('artur-shaik/vim-javacomplete2')
 call dein#add('leafgarland/typescript-vim')
+call dein#add('pbogut/deoplete-padawan')
 
 call dein#end()
 filetype plugin indent on
