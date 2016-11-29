@@ -59,6 +59,16 @@ let g:neomake_cpp_clang_maker = {
 "     autocmd!
 "     autocmd BufWritePre * call s:neomake_except_typescript()
 " augroup END
+let g:neomake_typescript_tsc_maker = {
+        \ 'args': [
+            \ '--noEmit'
+        \ ],
+        \ 'errorformat':
+            \ '%E%f %#(%l\,%c): error %m,' .
+            \ '%E%f %#(%l\,%c): %m,' .
+            \ '%Eerror %m,' .
+            \ '%C%\s%\+%m'
+        \ }
 autocmd! BufWritePost * Neomake
 
 " vim-go
