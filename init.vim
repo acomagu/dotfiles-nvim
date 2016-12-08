@@ -64,6 +64,7 @@ let g:neomake_typescript_tsc_maker = {
         \ 'args': [
             \ '--noEmit'
         \ ],
+        \ 'append_file': 0,
         \ 'errorformat':
             \ '%E%f %#(%l\,%c): error %m,' .
             \ '%E%f %#(%l\,%c): %m,' .
