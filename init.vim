@@ -216,6 +216,8 @@ set hlsearch
 set ambiwidth=double
 set hidden
 
+cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
+
 " configs of auto insertion list prefix on markdown files
 augroup config
   autocmd!
