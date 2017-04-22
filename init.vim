@@ -250,6 +250,15 @@ function! s:GetBufByte()
   endif
 endfunction
 
+augroup OpIME
+  autocmd!
+  autocmd InsertLeave * call ImInActivate()
+augroup END
+
+function! ImInActivate()
+  call system('fcitx-remote -c')
+endfunction
+
 function! CloseBuf()
   if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
     :q
