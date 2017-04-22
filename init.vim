@@ -35,6 +35,7 @@ call dein#add('leafgarland/typescript-vim')
 call dein#add('pbogut/deoplete-padawan')
 call dein#add('editorconfig/editorconfig-vim')
 call dein#add('zchee/deoplete-jedi')
+call dein#add('fishbullet/deoplete-ruby')
 
 call dein#end()
 filetype plugin indent on
