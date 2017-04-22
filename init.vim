@@ -99,6 +99,7 @@ endif
 let g:deoplete#keyword_patterns['default'] = '\h\w*'
 inoremap <expr><C-g>     deoplete#undo_completion()
 inoremap <expr><C-l>     deoplete#complete_common_string()
+inoremap <expr><C-c>     deoplete#manual_complete()
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
   return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
@@ -170,10 +171,10 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>t :tabnew<CR>
 nnoremap <Leader>q ZZ
-nnoremap <Leader>h 60h
-nnoremap <Leader>l 60l
-nnoremap <Leader>k 15k
-nnoremap <Leader>j 15j
+noremap <Leader>h 60h
+noremap <Leader>l 60l
+noremap <Leader>k 15k
+noremap <Leader>j 15j
 noremap <C-j> <Esc>:noh<CR>
 noremap! <C-j> <Esc>:noh<CR>
 tnoremap <C-j> <C-\><C-n>
