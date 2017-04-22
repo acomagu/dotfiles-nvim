@@ -27,11 +27,8 @@ call dein#add('nsf/gocode')
 call dein#add('neomake/neomake')
 call dein#add('carlitux/deoplete-ternjs', {'build': 'npm install -g tern'})
 call dein#add('zchee/deoplete-clang')
-call dein#add('ianks/vim-tsx')
 call dein#add('HerringtonDarkholme/yats.vim')
 call dein#add('mhartington/deoplete-typescript')
-" call dein#local('~/dev/deoplete-typescript', {'frozen': 1})
-call dein#add('kmnk/vim-unite-giti')
 call dein#add('tpope/vim-fugitive')
 call dein#add('artur-shaik/vim-javacomplete2')
 call dein#add('leafgarland/typescript-vim')
@@ -52,15 +49,6 @@ let g:neomake_cpp_clang_maker = {
       \ 'args': ['-I/home/yuki/.linuxbrew/include', '-std=c++0x'],
       \ }
 
-" function! s:neomake_except_typescript()
-"     if &filetype !~ 'typescript'
-"       Neomake
-"     endif
-" endfunction
-" augroup neomake_when_save
-"     autocmd!
-"     autocmd BufWritePre * call s:neomake_except_typescript()
-" augroup END
 let g:neomake_typescript_tsc_maker = {
         \ 'args': [
             \ '--noEmit'
@@ -92,8 +80,6 @@ let g:deoplete#sources#go#package_dot = 1
 let mapleader = "\<Space>"
 
 " deoplete
-let g:deoplete#enable_at_startup = 1
-
 let g:acp_enableAtStartup = 0
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
@@ -194,7 +180,6 @@ colorscheme molokai
 syntax on
 set t_Co=256
 set backspace=indent,eol,start
-set fileencoding=utf-8
 set scrolloff=5
 set noswapfile
 set nowritebackup
@@ -208,8 +193,7 @@ set smartindent
 set backspace=indent
 set vb t_vb=
 set novisualbell
-set clipboard+=unnamed
-set clipboard=unnamed
+set clipboard+=unnamedplus
 set list
 set ruler
 set matchpairs& matchpairs+=<:>
