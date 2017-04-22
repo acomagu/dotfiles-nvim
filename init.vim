@@ -19,6 +19,7 @@ call dein#add('koron/imcsc-vim')
 call dein#add('Shougo/neomru.vim')
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/unite-outline')
+call dein#add('Shougo/denite.nvim')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('fatih/vim-go')
 call dein#add('zchee/deoplete-go', {'build': 'make'})
@@ -146,9 +147,13 @@ call submode#map('flc', 'n', '', 'n', 'n')
 call submode#map('flc', 'n', '', 'N', 'N')
 
 " Unite
-nnoremap <Leader>u :Unite<CR>
-nnoremap <Leader>p :Unite file_rec<CR>
 let g:unite_enable_start_insert=1
+
+" Denite
+nnoremap <Leader>p :Denite buffer file_rec<CR>
+nnoremap <Leader>b :Denite buffer<CR>
+call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>', 'noremap')
 
 " deoplete-turnjs
 let g:tern_request_timeout = 1
