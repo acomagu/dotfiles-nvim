@@ -239,6 +239,17 @@ augroup BinaryXXD
   autocmd BufWritePost * set nomod | endif
 augroup END
 
+" Open terminal on new buffer
+autocmd VimEnter * if @% == '' && s:GetBufByte() == 0 | call Term()
+function! s:GetBufByte()
+  let byte = line2byte(line('$') + 1)
+  if byte == -1
+    return 0
+  else
+    return byte - 1
+  endif
+endfunction
+
 function! CloseBuf()
   if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
     :q
