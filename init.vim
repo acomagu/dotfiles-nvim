@@ -8,17 +8,12 @@ set runtimepath^=/home/yuki/.config/nvim/dein.vim/repos/github.com/Shougo/dein.v
 call dein#begin(expand('/home/yuki/.config/nvim/dein.vim'))
 call dein#add('Shougo/dein.vim')
 
-call dein#add('kien/ctrlp.vim')
 call dein#add('tomtom/tcomment_vim')
-call dein#add('terryma/vim-multiple-cursors')
 call dein#add('tomasr/molokai')
 call dein#add('AndrewRadev/splitjoin.vim')
 call dein#add('kana/vim-submode')
 call dein#add('plasticboy/vim-markdown')
 call dein#add('koron/imcsc-vim')
-call dein#add('Shougo/neomru.vim')
-call dein#add('Shougo/unite.vim')
-call dein#add('Shougo/unite-outline')
 call dein#add('Shougo/denite.nvim')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('fatih/vim-go')
@@ -135,9 +130,6 @@ nmap <expr> F 'hv0<Esc>?\%V['.nr2char(getchar()).']<CR><Plug>(flc)'
 call submode#enter_with('flc', 'n', '', '<Plug>(flc)', ':autocmd flc InsertEnter * noh<CR>')
 call submode#map('flc', 'n', '', 'n', 'n')
 call submode#map('flc', 'n', '', 'N', 'N')
-
-" Unite
-let g:unite_enable_start_insert=1
 
 " Denite
 nnoremap <Leader>p :Denite buffer file_rec<CR>
