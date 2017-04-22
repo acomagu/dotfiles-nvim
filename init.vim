@@ -169,8 +169,8 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " other custom keymaps
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>t :tabnew<CR>
-nnoremap <Leader>q ZZ
+nnoremap <Leader>e :enew<CR>
+nnoremap <Leader>q :up<CR>:call CloseBuf()<CR>
 noremap <Leader>h 60h
 noremap <Leader>l 60l
 noremap <Leader>k 15k
@@ -214,6 +214,7 @@ set smartcase
 set incsearch
 set hlsearch
 set ambiwidth=double
+set hidden
 
 " configs of auto insertion list prefix on markdown files
 augroup config
@@ -235,3 +236,27 @@ augroup BinaryXXD
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
 augroup END
+
+function! CloseBuf()
+  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    :q
+  else
+    :bd
+  endif
+endfunction
+
+function! CloseLastTerm()
+  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    :q
+  endif
+endfunction
+
+function! Term()
+  call termopen(&shell, {'on_exit': 'OnExit'})
+endfunction
+
+function! OnExit(job_id, code, event)
+  if a:code == 0
+    call CloseLastTerm()
+  endif
+endfunction
