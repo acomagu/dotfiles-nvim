@@ -22,7 +22,7 @@ call dein#add('nsf/gocode')
 call dein#add('neomake/neomake')
 call dein#add('carlitux/deoplete-ternjs', {'build': 'npm install -g tern'})
 call dein#add('zchee/deoplete-clang')
-call dein#add('HerringtonDarkholme/yats.vim')
+call dein#add('HerringtonDarkholme/yats.vim') " Typescript syntax highlighting
 call dein#add('mhartington/deoplete-typescript')
 call dein#add('tpope/vim-fugitive')
 call dein#add('artur-shaik/vim-javacomplete2')
