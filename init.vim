@@ -31,6 +31,7 @@ call dein#add('pbogut/deoplete-padawan')
 call dein#add('editorconfig/editorconfig-vim')
 call dein#add('zchee/deoplete-jedi')
 call dein#add('fishbullet/deoplete-ruby')
+call dein#add('itchyny/lightline.vim')
 
 call dein#end()
 filetype plugin indent on
@@ -160,6 +161,12 @@ let g:deoplete#sources#clang#flags = [
 
 " javacomplete2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" lightline.vim
+set noshowmode
+let g:lightline = {
+      \   'colorscheme': 'wombat',
+      \ }
 
 " other custom keymaps
 nnoremap <Leader>w :w<CR>
