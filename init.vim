@@ -39,8 +39,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-let g:python3_host_prog  = '/usr/bin/python3'
-
 " neomake
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_maker = {
