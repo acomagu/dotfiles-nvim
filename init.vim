@@ -1,11 +1,13 @@
 scriptencoding utf-8
 
 " dein.vim
+let s:dein_base_path = fnamemodify('~/.local/share/nvim/dein', ':p')
+let s:dein_plugin_path = s:dein_base_path . '/repos/github.com/Shougo/dein.vim'
 if &compatible
   set nocompatible
 endif
-set runtimepath^=/home/yuki/.config/nvim/dein.vim/repos/github.com/Shougo/dein.vim
-call dein#begin(expand('/home/yuki/.config/nvim/dein.vim'))
+execute 'set runtimepath+=' . s:dein_plugin_path
+call dein#begin(s:dein_base_path)
 call dein#add('Shougo/dein.vim')
 
 call dein#add('tomtom/tcomment_vim')
