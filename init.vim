@@ -277,7 +277,7 @@ function! CloseLastTerm()
 endfunction
 
 function! Term()
-  call termopen(&shell, {'on_exit': 'OnExit'})
+  call termopen('fish', {'on_exit': 'OnExit'})
 endfunction
 
 function! OnExit(job_id, code, event)
