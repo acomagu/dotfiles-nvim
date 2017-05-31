@@ -137,8 +137,8 @@ call submode#map('flc', 'n', '', 'N', 'N')
 nnoremap <Leader>b :Denite buffer<CR>
 nnoremap <Leader>p :<C-u>Denite `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>', 'noremap')
-call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>', 'noremap')
 call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
 
 " deoplete-turnjs
