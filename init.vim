@@ -173,7 +173,7 @@ let g:lightline = {
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :enew<CR>
 nnoremap <Leader>q :up<CR>:call CloseBuf()<CR>
-nnoremap <Leader>t :enew<CR>:terminal<CR>
+nnoremap <Leader>t :enew<CR>:call Term()<CR>
 noremap <Leader>h 60h
 noremap <Leader>l 60l
 noremap <Leader>k 15k
