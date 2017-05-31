@@ -135,7 +135,7 @@ call submode#map('flc', 'n', '', 'N', 'N')
 
 " Denite
 nnoremap <Leader>b :Denite buffer<CR>
-nnoremap <Leader>p :<C-u>Denite buffer `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+nnoremap <Leader>p :<C-u>Denite `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>', 'noremap')
 call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>', 'noremap')
