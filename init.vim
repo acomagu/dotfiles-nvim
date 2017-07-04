@@ -62,6 +62,8 @@ let g:neomake_typescript_tsc_maker = {
       \ }
 autocmd! BufWritePost * Neomake
 
+let g:neomake_go_gometalinter_args = ['--config='.$HOME.'/.config/gometalinter/config.json']
+
 " vim-go
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
