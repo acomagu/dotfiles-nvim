@@ -247,6 +247,11 @@ augroup BinaryXXD
   autocmd BufWritePost * set nomod | endif
 augroup END
 
+augroup python
+  autocmd!
+  autocmd FileType python execute "set colorcolumn=" . join(range(80, 9999), ',')
+augroup END
+
 " Open terminal on new buffer
 autocmd VimEnter * if @% == '' && s:GetBufByte() == 0 | call Term()
 function! s:GetBufByte()
