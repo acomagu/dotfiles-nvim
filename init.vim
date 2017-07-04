@@ -64,6 +64,9 @@ autocmd! BufWritePost * Neomake
 
 let g:neomake_go_gometalinter_args = ['--config='.$HOME.'/.config/gometalinter/config.json']
 
+let g:neomake_python_python_exe = 'python3'
+let g:neomake_python_enabled_makers = ['python', 'flake8', 'mypy']
+
 " vim-go
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
