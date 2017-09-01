@@ -71,9 +71,7 @@ let g:LanguageClient_serverCommands = {
     \   'scala': ['coursier', 'launch', '-r', 'https://dl.bintray.com/dhpcs/maven', '-r', 'sonatype:releases', 'com.github.dragos:languageserver_2.11:0.1.3'],
     \   'go': ['go-langserver'],
     \   'python': ['pyls'],
-    \ }
-let g:LanguageClient_serverConfigurations = {
-    \   'python': {},
+    \   'javascript': ['javascript-typescript-stdio'],
     \ }
 let g:LanguageClient_autoStart = 1
 
