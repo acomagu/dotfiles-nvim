@@ -29,6 +29,7 @@ call dein#add('dag/vim-fish')
 call dein#add('autozimu/LanguageClient-neovim')
 call dein#add('junegunn/fzf.vim')
 call dein#add('roxma/nvim-completion-manager')
+call dein#add('jaawerth/nrun.vim')
 
 call dein#end()
 filetype plugin indent on
@@ -65,6 +66,8 @@ autocmd! BufWritePost * Neomake
 let g:neomake_go_gometalinter_args = ['--config='.$HOME.'/.config/gometalinter/config.json']
 
 let g:neomake_python_enabled_makers = []
+
+au FileType javascript let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
 
 " LanguageClient
 let g:LanguageClient_serverCommands = {
