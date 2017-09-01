@@ -167,6 +167,7 @@ noremap <Leader>j 15j
 noremap <C-j> <Esc>:noh<CR>
 noremap! <C-j> <Esc>:noh<CR>
 tnoremap <C-j> <C-\><C-n>
+vnoremap // <Esc>/\%V
 
 " nvim
 colorscheme molokai
