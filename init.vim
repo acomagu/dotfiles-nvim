@@ -26,6 +26,7 @@ call dein#add('leafgarland/typescript-vim')
 call dein#add('editorconfig/editorconfig-vim')
 call dein#add('itchyny/lightline.vim')
 call dein#add('dag/vim-fish')
+call dein#add('autozimu/LanguageClient-neovim')
 call dein#add('junegunn/fzf.vim')
 call dein#add('roxma/nvim-completion-manager')
 
@@ -63,8 +64,20 @@ autocmd! BufWritePost * Neomake
 
 let g:neomake_go_gometalinter_args = ['--config='.$HOME.'/.config/gometalinter/config.json']
 
-let g:neomake_python_python_exe = 'python3'
-let g:neomake_python_enabled_makers = ['python', 'flake8', 'mypy']
+let g:neomake_python_enabled_makers = []
+
+" LanguageClient
+let g:LanguageClient_serverCommands = {
+    \   'scala': ['coursier', 'launch', '-r', 'https://dl.bintray.com/dhpcs/maven', '-r', 'sonatype:releases', 'com.github.dragos:languageserver_2.11:0.1.3'],
+    \   'go': ['go-langserver'],
+    \   'python': ['pyls'],
+    \ }
+let g:LanguageClient_serverConfigurations = {
+    \   'python': {},
+    \ }
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 
 " vim-go
 let g:go_fmt_command = "goimports"
