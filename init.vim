@@ -16,7 +16,6 @@ call dein#add('AndrewRadev/splitjoin.vim')
 call dein#add('kana/vim-submode')
 call dein#add('plasticboy/vim-markdown')
 call dein#add('koron/imcsc-vim')
-call dein#add('Shougo/denite.nvim')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('fatih/vim-go')
 call dein#add('zchee/deoplete-go', {'build': 'make'})
@@ -35,6 +34,7 @@ call dein#add('zchee/deoplete-jedi')
 call dein#add('itchyny/lightline.vim')
 call dein#add('dag/vim-fish')
 call dein#add('Shougo/deoplete-rct')
+call dein#add('junegunn/fzf.vim')
 
 call dein#end()
 filetype plugin indent on
@@ -138,13 +138,19 @@ call submode#enter_with('flc', 'n', '', '<Plug>(flc)', ':autocmd flc InsertEnter
 call submode#map('flc', 'n', '', 'n', 'n')
 call submode#map('flc', 'n', '', 'N', 'N')
 
-" Denite
-nnoremap <Leader>b :Denite buffer<CR>
-nnoremap <Leader>p :<C-u>Denite `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>', 'noremap')
-call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>', 'noremap')
-call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+" fzf.vim
+nnoremap <Leader>b :Buffer<CR>
+nnoremap <Leader>p :GFiles<CR>
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " deoplete-turnjs
 let g:tern_request_timeout = 1
@@ -172,7 +178,15 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 set noshowmode
 let g:lightline = {
       \   'colorscheme': 'wombat',
+      \   'component_function': {
+      \       'mode': 'LightlineMode',
+      \   },
       \ }
+
+function! LightlineMode()
+  return &filetype ==# 'fzf' ? 'FZF' :
+        \ lightline#mode()
+endfunction
 
 " other custom keymaps
 nnoremap <Leader>w :w<CR>
