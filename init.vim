@@ -16,6 +16,7 @@ call dein#add('AndrewRadev/splitjoin.vim')
 call dein#add('kana/vim-submode')
 call dein#add('plasticboy/vim-markdown')
 call dein#add('koron/imcsc-vim')
+call dein#add('Shougo/echodoc.vim')
 call dein#add('fatih/vim-go')
 call dein#add('neomake/neomake')
 call dein#add('HerringtonDarkholme/yats.vim') " Typescript syntax highlighting
@@ -77,6 +78,8 @@ let g:go_highlight_build_constraints = 1
 " set key of <Leader>
 let mapleader = "\<Space>"
 
+" echodoc
+let g:echodoc#enable_at_startup = 1
 
 " vim-submode
 let g:submode_keep_leaving_key = 1
@@ -184,6 +187,7 @@ set incsearch
 set hlsearch
 set ambiwidth=double
 set hidden
+" set completeopt=menuone
 
 cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
 
