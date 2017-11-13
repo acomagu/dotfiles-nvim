@@ -151,6 +151,9 @@ function! LightlineMode()
         \ lightline#mode()
 endfunction
 
+" vim-markdown
+let g:vim_markdown_folding_disabled = 1
+
 " other custom keymaps
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :enew<CR>
