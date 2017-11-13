@@ -16,31 +16,29 @@ call dein#add('AndrewRadev/splitjoin.vim')
 call dein#add('kana/vim-submode')
 call dein#add('plasticboy/vim-markdown')
 call dein#add('koron/imcsc-vim')
-call dein#add('Shougo/deoplete.nvim')
 call dein#add('fatih/vim-go')
-call dein#add('zchee/deoplete-go', {'build': 'make'})
-call dein#add('nsf/gocode')
 call dein#add('neomake/neomake')
-call dein#add('carlitux/deoplete-ternjs', {'build': 'npm install -g tern'})
-call dein#add('zchee/deoplete-clang')
 call dein#add('HerringtonDarkholme/yats.vim') " Typescript syntax highlighting
-call dein#add('mhartington/deoplete-typescript')
 call dein#add('tpope/vim-fugitive')
 call dein#add('artur-shaik/vim-javacomplete2')
 call dein#add('leafgarland/typescript-vim')
-call dein#add('pbogut/deoplete-padawan')
 call dein#add('editorconfig/editorconfig-vim')
-call dein#add('zchee/deoplete-jedi')
 call dein#add('itchyny/lightline.vim')
 call dein#add('dag/vim-fish')
-call dein#add('Shougo/deoplete-rct')
 call dein#add('junegunn/fzf.vim')
+call dein#add('roxma/nvim-completion-manager')
 
 call dein#end()
 filetype plugin indent on
 if dein#check_install()
   call dein#install()
 endif
+
+" neovim-completion-manager
+let g:cm_sources_override = {
+      \   'cm-jedi': {'enable':0}
+      \ }
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 " neomake
 let g:neomake_cpp_enabled_makers = ['clang']
@@ -76,48 +74,9 @@ let g:go_highlight_operators = 1
 let g:go_term_enabled = 1
 let g:go_highlight_build_constraints = 1
 
-" deoplete-go
-let g:deoplete#sources#go#align_class = 1
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#package_dot = 1
-
 " set key of <Leader>
 let mapleader = "\<Space>"
 
-" deoplete
-let g:acp_enableAtStartup = 0
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#sources#syntax#min_keyword_length = 0
-let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
-let g:deoplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
-if !exists('g:deoplete_keyword_patterns')
-  let g:deoplete#keyword_patterns = {}
-endif
-let g:deoplete#keyword_patterns['default'] = '\h\w*'
-inoremap <expr><C-g>     deoplete#undo_completion()
-inoremap <expr><C-l>     deoplete#complete_common_string()
-inoremap <expr><C-c>     deoplete#manual_complete()
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-endfunction
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd BufEnter *.tsx set filetype=typescript
-if !exists('g:deoplete#sources#omni#input_patterns')
-  let g:deoplete#sources#omni#input_patterns = {}
-endif
-let g:deoplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " vim-submode
 let g:submode_keep_leaving_key = 1
@@ -152,24 +111,12 @@ endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-" deoplete-turnjs
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
-
 " go-vim
 let g:go_template_autocreate = 0
 
 " vim-clang
 " let g:clang_cpp_options = '-std=c++0x -stdlib=libc++'
 let g:clang_cpp_options = '-std=c++0x -I /home/yuki/.linuxbrew/include'
-
-" deoplete-clang
-let g:deoplete#sources#clang#libclang_path = '/home/yuki/.linuxbrew/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/home/yuki/.linuxbrew/lib/clang'
-let g:deoplete#sources#clang#flags = [
-      \ "-std=c++0x",
-      \ "-I/home/yuki/.linuxbrew/include"
-      \ ]
 
 " javacomplete2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
