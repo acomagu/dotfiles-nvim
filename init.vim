@@ -1,5 +1,7 @@
 scriptencoding utf-8
 
+set rtp+=$GHQ_ROOT/github.com/junegunn/fzf
+
 " vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 
