@@ -205,7 +205,7 @@ set incsearch
 set hlsearch
 set ambiwidth=double
 set hidden
-" set completeopt=menuone
+set completeopt=menuone
 
 cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
 
