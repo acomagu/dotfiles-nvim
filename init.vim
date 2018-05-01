@@ -137,12 +137,18 @@ let g:lightline = {
       \   'colorscheme': 'wombat',
       \   'component_function': {
       \       'mode': 'LightlineMode',
+      \       'filename': 'LightlineFilename',
       \   },
       \ }
 
 function! LightlineMode()
   return &filetype ==# 'fzf' ? 'FZF' :
         \ lightline#mode()
+endfunction
+
+function! LightlineFilename()
+  return &filetype ==# 'fzf' ? '' :
+        \ fnamemodify(expand('%'), ':~:.') !=# '' ? fnamemodify(expand('%'), ':~:.') : '[No Name]'
 endfunction
 
 " vim-markdown
