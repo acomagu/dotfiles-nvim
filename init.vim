@@ -26,6 +26,7 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf.vim'
 Plug 'roxma/nvim-completion-manager'
 Plug 'jaawerth/nrun.vim'
+Plug 'posva/vim-vue'
 
 call plug#end()
 
