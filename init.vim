@@ -45,6 +45,7 @@ let g:neomake_cpp_clang_maker = {
       \ 'args': ['-I/home/yuki/.linuxbrew/include', '-std=c++0x'],
       \ }
 
+let g:neomake_typescript_enabled_makers = []
 let g:neomake_typescript_tsc_maker = {
       \ 'args': [
           \ '--noEmit'
@@ -70,6 +71,7 @@ let g:LanguageClient_serverCommands = {
     \   'go': ['go-langserver'],
     \   'python': ['pyls'],
     \   'javascript': ['javascript-typescript-stdio'],
+    \   'typescript': ['javascript-typescript-stdio'],
     \ }
 let g:LanguageClient_autoStart = 1
 
