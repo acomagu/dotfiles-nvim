@@ -75,6 +75,7 @@ let g:LanguageClient_serverCommands = {
     \   'ruby': ['language_server-ruby'],
     \ }
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_changeThrottle = 0.5
 
 nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 
