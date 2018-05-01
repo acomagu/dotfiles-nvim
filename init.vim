@@ -1,41 +1,30 @@
 scriptencoding utf-8
 
-" dein.vim
-let s:dein_base_path = fnamemodify('~/.local/share/nvim/dein', ':p')
-let s:dein_plugin_path = s:dein_base_path . '/repos/github.com/Shougo/dein.vim'
-if &compatible
-  set nocompatible
-endif
-execute 'set runtimepath+=' . s:dein_plugin_path
-call dein#begin(s:dein_base_path)
-call dein#add('Shougo/dein.vim')
+" vim-plug
+call plug#begin('~/.local/share/nvim/plugged')
 
-call dein#add('tomtom/tcomment_vim')
-call dein#add('tomasr/molokai')
-call dein#add('AndrewRadev/splitjoin.vim')
-call dein#add('kana/vim-submode')
-call dein#add('plasticboy/vim-markdown')
-call dein#add('koron/imcsc-vim')
-call dein#add('Shougo/echodoc.vim')
-call dein#add('fatih/vim-go')
-call dein#add('neomake/neomake')
-call dein#add('HerringtonDarkholme/yats.vim') " Typescript syntax highlighting
-call dein#add('tpope/vim-fugitive')
-call dein#add('artur-shaik/vim-javacomplete2')
-call dein#add('leafgarland/typescript-vim')
-call dein#add('editorconfig/editorconfig-vim')
-call dein#add('itchyny/lightline.vim')
-call dein#add('dag/vim-fish')
-call dein#add('autozimu/LanguageClient-neovim')
-call dein#add('junegunn/fzf.vim')
-call dein#add('roxma/nvim-completion-manager')
-call dein#add('jaawerth/nrun.vim')
+Plug 'tomtom/tcomment_vim'
+Plug 'tomasr/molokai'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'kana/vim-submode'
+Plug 'plasticboy/vim-markdown'
+Plug 'koron/imcsc-vim'
+Plug 'Shougo/echodoc.vim'
+Plug 'fatih/vim-go'
+Plug 'neomake/neomake'
+Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
+Plug 'tpope/vim-fugitive'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'leafgarland/typescript-vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'itchyny/lightline.vim'
+Plug 'dag/vim-fish'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'junegunn/fzf.vim'
+Plug 'roxma/nvim-completion-manager'
+Plug 'jaawerth/nrun.vim'
 
-call dein#end()
-filetype plugin indent on
-if dein#check_install()
-  call dein#install()
-endif
+call plug#end()
 
 " neovim-completion-manager
 let g:cm_sources_override = {
