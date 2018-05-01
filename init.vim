@@ -78,6 +78,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_changeThrottle = 0.5
 
 nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <C-[> :call LanguageClient_textDocument_references()<CR>
 
 " vim-go
 let g:go_fmt_command = "goimports"
