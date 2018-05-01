@@ -209,6 +209,9 @@ set completeopt=menuone
 
 cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
 
+" Hide NetRW buffer
+autocmd FileType netrw setl bufhidden=wipe
+
 " configs of auto insertion list prefix on markdown files
 augroup config
   autocmd!
