@@ -109,15 +109,8 @@ call submode#map('flc', 'n', '', 'N', 'N')
 nnoremap <Leader>b :Buffer<CR>
 nnoremap <Leader>p :GFiles<CR>
 
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
+"" Suppress fzf.vim custom statusline(use lightline)
+autocmd! User FzfStatusLine :
 
 " go-vim
 let g:go_template_autocreate = 0
