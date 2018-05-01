@@ -30,11 +30,13 @@ Plug 'posva/vim-vue'
 
 call plug#end()
 
-" neovim-completion-manager
+" nvim-completion-manager
+
 let g:cm_sources_override = {
       \   'cm-jedi': {'enable':0}
       \ }
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
 " neomake
 let g:neomake_cpp_enabled_makers = ['clang']
