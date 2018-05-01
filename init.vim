@@ -13,6 +13,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'koron/imcsc-vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'fatih/vim-go'
+Plug 'buoto/gotests-vim'
 Plug 'neomake/neomake'
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
 Plug 'tpope/vim-fugitive'
