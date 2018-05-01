@@ -269,6 +269,7 @@ endfunction
 
 function! Term()
   call termopen('fish', {'on_exit': 'OnExit'})
+  setlocal nonumber norelativenumber
 endfunction
 
 function! OnExit(job_id, code, event)
