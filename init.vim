@@ -145,7 +145,7 @@ let g:vim_markdown_folding_disabled = 1
 " other custom keymaps
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :enew<CR>
-nnoremap <Leader>q :up<CR>:call CloseBuf()<CR>
+nnoremap <Leader>q ZZ
 nnoremap <Leader>t :enew<CR>:call Term()<CR>
 noremap <Leader>h 60h
 noremap <Leader>l 60l
@@ -192,7 +192,6 @@ set smartcase
 set incsearch
 set hlsearch
 set ambiwidth=double
-set hidden
 set completeopt=menuone
 
 cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
@@ -220,50 +219,3 @@ augroup BinaryXXD
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
 augroup END
-
-" Open terminal on new buffer
-autocmd VimEnter * if @% == '' && s:GetBufByte() == 0 | call Term()
-function! s:GetBufByte()
-  let byte = line2byte(line('$') + 1)
-  if byte == -1
-    return 0
-  else
-    return byte - 1
-  endif
-endfunction
-
-augroup OpIME
-  autocmd!
-  autocmd InsertLeave * call ImInActivate()
-augroup END
-
-function! ImInActivate()
-  call system('fcitx-remote -c')
-endfunction
-
-function! CloseBuf()
-  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    :q
-  else
-    :bd
-  endif
-endfunction
-
-function! CloseLastTerm()
-  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    :q
-  endif
-endfunction
-
-function! Term()
-  call termopen('fish', {'on_exit': 'OnExit'})
-  setlocal nonumber norelativenumber
-endfunction
-
-function! OnExit(job_id, code, event)
-  if a:code == 0
-    call CloseLastTerm()
-  endif
-endfunction
-
-autocmd BufLeave * if exists('b:term_title') && exists('b:terminal_job_pid') | file `='term/' . b:terminal_job_pid . '/' . b:term_title`
