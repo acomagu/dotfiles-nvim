@@ -36,21 +36,21 @@ call plug#end()
 " neomake
 let g:neomake_cpp_enabled_makers = ['clang']
 let g:neomake_cpp_clang_maker = {
-      \ 'exe': 'clang++',
-      \ 'args': ['-I/home/yuki/.linuxbrew/include', '-std=c++0x'],
+      \   'exe': 'clang++',
+      \   'args': ['-I/home/yuki/.linuxbrew/include', '-std=c++0x'],
       \ }
 
 let g:neomake_typescript_enabled_makers = []
 let g:neomake_typescript_tsc_maker = {
       \ 'args': [
-          \ '--noEmit'
+      \   '--noEmit'
       \ ],
       \ 'append_file': 0,
       \ 'errorformat':
-          \ '%E%f %#(%l\,%c): error %m,' .
-          \ '%E%f %#(%l\,%c): %m,' .
-          \ '%Eerror %m,' .
-          \ '%C%\s%\+%m'
+      \   '%E%f %#(%l\,%c): error %m,' .
+      \   '%E%f %#(%l\,%c): %m,' .
+      \   '%Eerror %m,' .
+      \   '%C%\s%\+%m'
       \ }
 autocmd! BufWritePost * Neomake
 
