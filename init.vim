@@ -203,8 +203,6 @@ set title titlestring=nvim\ %{fnamemodify(expand('%'),\ ':~:.')}\ %{TitleModeExp
 set laststatus=0
 set noshowmode
 
-cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
-
 function! TitleModeExp()
   let l:m = mode()
   if l:m == 'n'
