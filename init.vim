@@ -23,7 +23,10 @@ Plug 'artur-shaik/vim-javacomplete2'
 Plug 'leafgarland/typescript-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'dag/vim-fish'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \   'branch': 'next',
+    \   'do': 'bash install.sh',
+    \ }
 Plug 'junegunn/fzf.vim'
 Plug 'jaawerth/nrun.vim'
 Plug 'posva/vim-vue'
