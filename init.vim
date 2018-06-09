@@ -6,6 +6,7 @@ set rtp+=$GHQ_ROOT/github.com/junegunn/fzf
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'tomtom/tcomment_vim'
+Plug 'Shougo/deoplete.nvim'
 Plug 'tomasr/molokai'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'kana/vim-submode'
@@ -13,6 +14,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'koron/imcsc-vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}  " For completion with vim-go
 Plug 'buoto/gotests-vim'
 Plug 'neomake/neomake'
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
@@ -24,19 +26,10 @@ Plug 'itchyny/lightline.vim'
 Plug 'dag/vim-fish'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf.vim'
-Plug 'roxma/nvim-completion-manager'
 Plug 'jaawerth/nrun.vim'
 Plug 'posva/vim-vue'
 
 call plug#end()
-
-" nvim-completion-manager
-
-let g:cm_sources_override = {
-      \   'cm-jedi': {'enable':0}
-      \ }
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
 " neomake
 let g:neomake_cpp_enabled_makers = ['clang']
@@ -79,6 +72,25 @@ let g:LanguageClient_changeThrottle = 0.5
 
 nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <C-[> :call LanguageClient_textDocument_references()<CR>
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#sources#syntax#min_keyword_length = 0
+" if !exists('g:deoplete_keyword_patterns')
+"   let g:deoplete#keyword_patterns = {}
+" endif
+" let g:deoplete#keyword_patterns['default'] = '\h\w*'
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+"   return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+" endfunction
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" if !exists('g:deoplete#sources#omni#input_patterns')
+"   let g:deoplete#sources#omni#input_patterns = {}
+" endif
+" let g:deoplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " vim-go
 let g:go_fmt_command = "goimports"
