@@ -22,7 +22,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'leafgarland/typescript-vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'itchyny/lightline.vim'
 Plug 'dag/vim-fish'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf.vim'
@@ -130,9 +129,6 @@ call submode#map('flc', 'n', '', 'N', 'N')
 nnoremap <Leader>b :Buffer<CR>
 nnoremap <Leader>p :GFiles<CR>
 
-"" Suppress fzf.vim custom statusline(use lightline)
-autocmd! User FzfStatusLine :
-
 " go-vim
 let g:go_template_autocreate = 0
 
@@ -142,26 +138,6 @@ let g:clang_cpp_options = '-std=c++0x -I /home/yuki/.linuxbrew/include'
 
 " javacomplete2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-" lightline.vim
-set noshowmode
-let g:lightline = {
-      \   'colorscheme': 'wombat',
-      \   'component_function': {
-      \       'mode': 'LightlineMode',
-      \       'filename': 'LightlineFilename',
-      \   },
-      \ }
-
-function! LightlineMode()
-  return &filetype ==# 'fzf' ? 'FZF' :
-        \ lightline#mode()
-endfunction
-
-function! LightlineFilename()
-  return &filetype ==# 'fzf' ? '' :
-        \ fnamemodify(expand('%'), ':~:.') !=# '' ? fnamemodify(expand('%'), ':~:.') : '[No Name]'
-endfunction
 
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
