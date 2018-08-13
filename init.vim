@@ -6,7 +6,6 @@ set rtp+=$GHQ_ROOT/github.com/junegunn/fzf
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'tomtom/tcomment_vim'
-Plug 'Shougo/deoplete.nvim'
 Plug 'tomasr/molokai'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'kana/vim-submode'
@@ -14,7 +13,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'koron/imcsc-vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make'}  " For completion with vim-go
 Plug 'buoto/gotests-vim'
 Plug 'neomake/neomake'
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
@@ -23,10 +21,10 @@ Plug 'artur-shaik/vim-javacomplete2'
 Plug 'leafgarland/typescript-vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'dag/vim-fish'
-Plug 'autozimu/LanguageClient-neovim', {
-    \   'branch': 'next',
-    \   'do': 'bash install.sh',
-    \ }
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'yami-beta/asyncomplete-gocode.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'jaawerth/nrun.vim'
 Plug 'posva/vim-vue'
@@ -60,39 +58,73 @@ let g:neomake_python_enabled_makers = []
 
 au FileType javascript let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
 
-" LanguageClient
-let g:LanguageClient_serverCommands = {
-    \   'scala': ['coursier', 'launch', '-r', 'https://dl.bintray.com/dhpcs/maven', '-r', 'sonatype:releases', 'com.github.dragos:languageserver_2.11:0.1.3'],
-    \   'go': ['go-langserver'],
-    \   'python': ['pyls'],
-    \   'javascript': ['typescript-language-server', '--stdio'],
-    \   'typescript': ['javascript-typescript-stdio'],
-    \   'ruby': ['language_server-ruby'],
-    \ }
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_changeThrottle = 0.5
+" vim-lsp
+if executable('coursier')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'scala-languageserver',
+        \   'cmd': {server_info->['coursier', 'launch', '-r', 'https://dl.bintray.com/dhpcs/maven', '-r', 'sonatype:releases', 'com.github.dragos:languageserver_2.11:0.1.3']},
+        \   'whitelist': ['scala'],
+        \ })
+endif
+if executable('go-langserver')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'go-langserver',
+        \   'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+        \   'whitelist': ['go'],
+        \ })
+endif
+if executable('pyls')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'pyls',
+        \   'cmd': {server_info->['pyls']},
+        \   'whitelist': ['python'],
+        \ })
+endif
+if executable('typescript-language-server')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'typescript-language-server',
+        \   'cmd': {server_info->['typescript-language-server', '--stdio']},
+        \   'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \   'whitelist': ['javascript'],
+        \ })
+endif
+if executable('javascript-typescript-stdio')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'javascript-typescript-stdio',
+        \   'cmd': {server_info->['javascript-typescript-stdio']},
+        \   'whitelist': ['typescript'],
+        \ })
+endif
+if executable('language_server-ruby')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'language_server-ruby',
+        \   'cmd': {server_info->['language_server-ruby']},
+        \   'whitelist': ['ruby'],
+        \ })
+endif
+if executable('rls')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'rls',
+        \   'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \   'whitelist': ['rust'],
+        \ })
+endif
 
-nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <C-[> :call LanguageClient_textDocument_references()<CR>
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#sources#syntax#min_keyword_length = 0
-" if !exists('g:deoplete_keyword_patterns')
-"   let g:deoplete#keyword_patterns = {}
-" endif
-" let g:deoplete#keyword_patterns['default'] = '\h\w*'
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function()
-"   return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-" endfunction
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" if !exists('g:deoplete#sources#omni#input_patterns')
-"   let g:deoplete#sources#omni#input_patterns = {}
-" endif
-" let g:deoplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" asyncomplete
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+let g:asyncomplete_log_file = '/tmp/asyncomplete'
+call asyncomplete#register_source(
+      \   asyncomplete#sources#gocode#get_source_options({
+      \     'name': 'gocode',
+      \     'whitelist': ['go'],
+      \     'completor': function('asyncomplete#sources#gocode#completor'),
+      \     'config': {
+      \       'gocode_path': expand('~/.local/bin/gocode'),
+      \     },
+      \   }),
+      \ )
 
 " vim-go
 let g:go_fmt_command = "goimports"
