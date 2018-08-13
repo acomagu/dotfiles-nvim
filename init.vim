@@ -12,7 +12,7 @@ Plug 'kana/vim-submode'
 Plug 'plasticboy/vim-markdown'
 Plug 'koron/imcsc-vim'
 Plug 'Shougo/echodoc.vim'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'branch': 'gocode-change' }
 Plug 'buoto/gotests-vim'
 Plug 'neomake/neomake'
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
