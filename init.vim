@@ -194,7 +194,7 @@ vnoremap // <Esc>/\%V
 
 nnoremap <silent> T :silent !tmux select-pane -t :.+<CR>
 nnoremap <silent> A :silent !tmux list-panes -s -F'\#{pane_id}: \#{pane_title}' \| fzf-tmux \| cut -d: -f1 \| xargs -r tmux swap-pane -s $(tmux display -p '\#{pane_id}') -t<CR>
-nnoremap <silent> D :silent !tmux list-windows -F'\#{window_id}: \#{window_name} (\#{window_panes} panes) [\#{window_width}x\#{window_height}] [layout \#{window_layout}] \#{window_stack_index}' \| sort -k 8 \| tail +2 \| fzf-tmux --reverse \| cut -d: -f1 \| xargs -r tmux select-window -t<CR>
+nnoremap <silent> D :silent !tmux list-panes -s -F'\#{window_id}: \#{pane_title} (\#{window_panes} panes) :\#{window_stack_index}' \| sort -t: -k1,1 -u \| sort -t: -k3 \| tail +2 \| fzf-tmux --reverse \| cut -d: -f1 \| xargs -r tmux select-window -t<CR>
 nnoremap <silent> C :silent !tmux new-window<CR>
 nnoremap <silent> Q :silent !git ls-files \| fzf-tmux \| xargs -r tmux new-window nvim<CR>
 
