@@ -201,12 +201,6 @@ noremap n nzz
 tnoremap <C-j> <C-\><C-n>
 vnoremap // <Esc>/\%V
 
-nnoremap <silent> T :silent !tmux select-pane -t :.+<CR>
-nnoremap <silent> A :silent !tmux list-panes -s -F'\#{pane_id}: \#{pane_title}' \| fzf-tmux \| cut -d: -f1 \| xargs -r tmux swap-pane -s $(tmux display -p '\#{pane_id}') -t<CR>
-nnoremap <silent> D :silent !tmux list-panes -s -F'\#{window_id}: \#{pane_title} (\#{window_panes} panes) :\#{window_stack_index}' \| sort -t: -k1,1 -u \| sort -t: -k3 \| tail +2 \| fzf-tmux --reverse \| cut -d: -f1 \| xargs -r tmux select-window -t<CR>
-nnoremap <silent> C :silent !tmux new-window<CR>
-nnoremap <silent> Q :silent !git ls-files \| fzf-tmux \| xargs -r tmux new-window nvim<CR>
-
 " nvim
 colorscheme molokai
 syntax on
@@ -243,33 +237,6 @@ set incsearch
 set hlsearch
 set ambiwidth=double
 set completeopt=menuone
-set title titlestring=nvim\ %{fnamemodify(expand('%'),\ ':~:.')}\ %{TitleModeExp()}
-set laststatus=0
-set noshowmode
-
-function! TitleModeExp()
-  let l:m = mode()
-  if l:m == 'n'
-    return ''
-  elseif l:m ==? 'v'
-    return ' [Visual]'
-  elseif l:m ==? 's'
-    return ' [Select]'
-  elseif l:m == 'i'
-    return ' [Insert]'
-  elseif l:m ==# 'R'
-    return ' [Replace]'
-  elseif l:m == 'c'
-    return ' [CommandLine]'
-  elseif l:m ==# 'r'
-    return ' [Prompt]'
-  elseif l:m == '!'
-    return ' [ExternalCommand]'
-  elseif l:m == 't'
-    return ' [Terminal]'
-  endif
-  return ' [' . mode(1) . ']'
-endfunction
 
 " Hide NetRW buffer
 autocmd FileType netrw setl bufhidden=wipe
