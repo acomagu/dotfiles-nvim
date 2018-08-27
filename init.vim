@@ -59,6 +59,8 @@ let g:neomake_python_enabled_makers = []
 au FileType javascript let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
 
 " vim-lsp
+nnoremap <C-]> :LspDefinition<CR>
+
 if executable('coursier')
   au User lsp_setup call lsp#register_server({
         \   'name': 'scala-languageserver',
