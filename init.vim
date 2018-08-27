@@ -87,6 +87,13 @@ if executable('typescript-language-server')
         \   'name': 'typescript-language-server',
         \   'cmd': {server_info->['typescript-language-server', '--stdio']},
         \   'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \   'whitelist': [''],
+        \ })
+endif
+if executable('js-langserver')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'js-langserver',
+        \   'cmd': {server_info->['js-langserver', '--stdio']},
         \   'whitelist': ['javascript'],
         \ })
 endif
@@ -94,7 +101,7 @@ if executable('javascript-typescript-stdio')
   au User lsp_setup call lsp#register_server({
         \   'name': 'javascript-typescript-stdio',
         \   'cmd': {server_info->['javascript-typescript-stdio']},
-        \   'whitelist': ['typescript'],
+        \   'whitelist': ['typescript', 'javascript'],
         \ })
 endif
 if executable('language_server-ruby')
