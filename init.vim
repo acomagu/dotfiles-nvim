@@ -173,6 +173,19 @@ call submode#map('flc', 'n', '', 'N', 'N')
 " fzf.vim
 nnoremap <Leader>b :Buffer<CR>
 nnoremap <Leader>p :GFiles<CR>
+nnoremap <Leader>t :call Tabs()<CR>
+nnoremap <Leader>n :tab split<CR>
+
+function! Tabs()
+    let tabs = map(gettabinfo(), {_, v -> v['tabnr']})
+    let current_tab = tabpagenr()
+    let tabs_without_current = filter(tabs, {_, nr -> nr != current_tab})
+    call fzf#run({
+          \   'source': tabs_without_current,
+          \   'sink': {nr -> execute('tabn ' . nr)},
+          \   'down': '30%',
+          \ })
+endfunction
 
 "" Suppress fzf.vim custom statusline(use lightline)
 autocmd! User FzfStatusLine :
@@ -214,7 +227,7 @@ let g:vim_markdown_folding_disabled = 1
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :enew<CR>
 nnoremap <Leader>q :up<CR>:call CloseBuf()<CR>
-nnoremap <Leader>t :enew<CR>:call Term()<CR>
+nnoremap <Leader>c :enew<CR>:call Term()<CR>
 noremap <Leader>h 60h
 noremap <Leader>l 60l
 noremap <Leader>k 15k
