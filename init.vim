@@ -173,18 +173,17 @@ call submode#map('flc', 'n', '', 'N', 'N')
 " fzf.vim
 nnoremap <Leader>b :Buffer<CR>
 nnoremap <Leader>p :GFiles<CR>
-nnoremap <Leader>t :call Tabs()<CR>
-nnoremap <Leader>n :tab split<CR>
+nnoremap <Leader>g y:call GitGrep("")<CR>
+vnoremap <Leader>g y:call GitGrep(@")<CR>
 
-function! Tabs()
-    let tabs = map(gettabinfo(), {_, v -> v['tabnr']})
-    let current_tab = tabpagenr()
-    let tabs_without_current = filter(tabs, {_, nr -> nr != current_tab})
-    call fzf#run({
-          \   'source': tabs_without_current,
-          \   'sink': {nr -> execute('tabn ' . nr)},
-          \   'down': '30%',
-          \ })
+function! GitGrep(kwd)
+  call fzf#vim#grep(
+        \   'git grep --line-number ""', 0,
+        \   {
+        \     'dir': systemlist('git rev-parse --show-toplevel')[0],
+        \     'options': '--query='.shellescape(a:kwd),
+        \   }, 0
+        \ )
 endfunction
 
 "" Suppress fzf.vim custom statusline(use lightline)
@@ -237,6 +236,19 @@ noremap! <C-j> <Esc>:noh<CR>
 noremap n nzz
 tnoremap <C-j> <C-\><C-n>
 vnoremap // <Esc>/\%V
+nnoremap <Leader>t :call Tabs()<CR>
+nnoremap <Leader>n :tab split<CR>
+
+function! Tabs()
+    let tabs = map(gettabinfo(), {_, v -> v['tabnr']})
+    let current_tab = tabpagenr()
+    let tabs_without_current = filter(tabs, {_, nr -> nr != current_tab})
+    call fzf#run({
+          \   'source': tabs_without_current,
+          \   'sink': {nr -> execute('tabn ' . nr)},
+          \   'down': '30%',
+          \ })
+endfunction
 
 " nvim
 colorscheme molokai
@@ -275,6 +287,9 @@ set hlsearch
 set ambiwidth=double
 set hidden
 set completeopt=menuone
+if exists('&ambw')
+  set ambw=double
+endif
 
 " Hide NetRW buffer
 autocmd FileType netrw setl bufhidden=wipe
@@ -324,14 +339,16 @@ function! CloseBuf()
   if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
     :q
   else
-    :bd
+    :bp|bd #
   endif
 endfunction
 
 function! CloseLastTerm()
   if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
     :q
-  endif
+  else
+    :bp|bd! #
+  end
 endfunction
 
 function! Term()
