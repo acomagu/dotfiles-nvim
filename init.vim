@@ -267,43 +267,40 @@ endfunction
 " nvim
 colorscheme molokai
 syntax on
-set t_Co=256
 set ambiwidth=single
-set backspace=indent,eol,start
-set scrolloff=5
-set noswapfile
-set nowritebackup
-set nobackup
-set number
-set showmatch matchtime=1
 set autoindent
-set expandtab
-set shiftwidth=2
-set smartindent
 set backspace=indent
-set vb t_vb=
-set novisualbell
-set clipboard+=unnamedplus
-set list
-set ruler
-set matchpairs& matchpairs+=<:>
-set showmatch
-set matchtime=3
-set wrap
-set textwidth=0
-set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
-set tabstop=2
-set shiftround
-set infercase
-set ignorecase
-set smartcase
-set incsearch
-set hlsearch
-set hidden
+set backspace=indent,eol,start
+set clipboard=unnamedplus
 set completeopt=menuone
-if exists('&ambw')
-  set ambw=double
-endif
+set expandtab
+set hidden
+set hlsearch
+set ignorecase
+set incsearch
+set infercase
+set list
+set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
+set matchpairs& matchpairs+=<:>
+set matchtime=3
+set nobackup
+set noswapfile
+set novisualbell
+set nowritebackup
+set number
+set ruler
+set scrolloff=5
+set shiftround
+set shiftwidth=2
+set showmatch
+set showmatch matchtime=1
+set smartcase
+set smartindent
+set tabstop=2
+set t_Co=256
+set textwidth=0
+set vb t_vb=
+set wrap
 
 " Hide NetRW buffer
 autocmd FileType netrw setl bufhidden=wipe
