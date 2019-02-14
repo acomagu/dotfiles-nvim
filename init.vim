@@ -25,11 +25,11 @@ Plug 'dag/vim-fish'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'yami-beta/asyncomplete-gocode.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'jaawerth/nrun.vim'
 Plug 'niklasl/vim-rdf'
 Plug 'posva/vim-vue'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 call plug#end()
 
@@ -61,81 +61,93 @@ let g:neomake_python_enabled_makers = []
 au FileType javascript let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
 
 " vim-lsp
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
 nnoremap <C-]> :LspDefinition<CR>
 
-if executable('coursier')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'scala-languageserver',
-        \   'cmd': {server_info->['coursier', 'launch', '-r', 'https://dl.bintray.com/dhpcs/maven', '-r', 'sonatype:releases', 'com.github.dragos:languageserver_2.11:0.1.3']},
-        \   'whitelist': ['scala'],
-        \ })
-endif
-if executable('go-langserver')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'go-langserver',
-        \   'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
-        \   'whitelist': ['go'],
-        \ })
-endif
-if executable('pyls')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'pyls',
-        \   'cmd': {server_info->['pyls']},
-        \   'whitelist': ['python'],
-        \ })
-endif
-if executable('typescript-language-server')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'typescript-language-server',
-        \   'cmd': {server_info->['typescript-language-server', '--stdio']},
-        \   'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-        \   'whitelist': [''],
-        \ })
-endif
-if executable('js-langserver')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'js-langserver',
-        \   'cmd': {server_info->['js-langserver', '--stdio']},
-        \   'whitelist': ['javascript'],
-        \ })
-endif
-if executable('javascript-typescript-stdio')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'javascript-typescript-stdio',
-        \   'cmd': {server_info->['javascript-typescript-stdio']},
-        \   'whitelist': ['typescript', 'javascript'],
-        \ })
-endif
-if executable('language_server-ruby')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'language_server-ruby',
-        \   'cmd': {server_info->['language_server-ruby']},
-        \   'whitelist': ['ruby'],
-        \ })
-endif
-if executable('rls')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'rls',
-        \   'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-        \   'whitelist': ['rust'],
-        \ })
-endif
+augroup Lsp
+  au!
+  if executable('coursier')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'scala-languageserver',
+          \   'cmd': {server_info->['coursier', 'launch', '-r', 'https://dl.bintray.com/dhpcs/maven', '-r', 'sonatype:releases', 'com.github.dragos:languageserver_2.11:0.1.3']},
+          \   'whitelist': ['scala'],
+          \ })
+    au FileType scala setlocal omnifunc=lsp#complete
+  endif
+  " if executable('golsp')
+  "   au User lsp_setup call lsp#register_server({
+  "         \   'name': 'golsp',
+  "         \   'cmd': {server_info->['golsp', '-mode', 'stdio']},
+  "         \   'whitelist': ['go'],
+  "         \ })
+  "   au FileType go setlocal omnifunc=lsp#complete
+  " endif
+  if executable('bingo')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'bingo',
+          \   'cmd': {server_info->['bingo']},
+          \   'whitelist': ['go'],
+          \ })
+    au FileType go setlocal omnifunc=lsp#complete
+  endif
+  if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'pyls',
+          \   'cmd': {server_info->['pyls']},
+          \   'whitelist': ['python'],
+          \ })
+    au FileType python setlocal omnifunc=lsp#complete
+  endif
+  if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'typescript-language-server',
+          \   'cmd': {server_info->['typescript-language-server', '--stdio']},
+          \   'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+          \   'whitelist': ['typescript'],
+          \ })
+    au FileType typescript setlocal omnifunc=lsp#complete
+  endif
+  if executable('js-langserver')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'js-langserver',
+          \   'cmd': {server_info->['js-langserver', '--stdio']},
+          \   'whitelist': ['javascript'],
+          \ })
+    au FileType javascript setlocal omnifunc=lsp#complete
+  endif
+  if executable('javascript-typescript-stdio')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'javascript-typescript-stdio',
+          \   'cmd': {server_info->['javascript-typescript-stdio']},
+          \   'whitelist': ['typescript', 'javascript'],
+          \ })
+    au FileType javascript setlocal omnifunc=lsp#complete
+  endif
+  if executable('language_server-ruby')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'language_server-ruby',
+          \   'cmd': {server_info->['language_server-ruby']},
+          \   'whitelist': ['ruby'],
+          \ })
+    au FileType ruby setlocal omnifunc=lsp#complete
+  endif
+  if executable('rls')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'rls',
+          \   'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+          \   'whitelist': ['rust'],
+          \ })
+    au FileType rust setlocal omnifunc=lsp#complete
+  endif
+augroup END
 
 " asyncomplete
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 let g:asyncomplete_log_file = '/tmp/asyncomplete'
-call asyncomplete#register_source(
-      \   asyncomplete#sources#gocode#get_source_options({
-      \     'name': 'gocode',
-      \     'whitelist': ['go'],
-      \     'completor': function('asyncomplete#sources#gocode#completor'),
-      \     'config': {
-      \       'gocode_path': expand('~/.local/bin/gocode'),
-      \     },
-      \   }),
-      \ )
+let g:asyncomplete_smart_completion = 0
 
 " vim-go
 let g:go_fmt_command = "goimports"
