@@ -5,31 +5,31 @@ set rtp+=$GHQ_ROOT/github.com/junegunn/fzf
 " vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'tomtom/tcomment_vim'
-Plug 'tomasr/molokai'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'kana/vim-submode'
-Plug 'plasticboy/vim-markdown'
-Plug 'koron/imcsc-vim'
-Plug 'Shougo/echodoc.vim'
-Plug 'fatih/vim-go', { 'branch': 'gocode-change' }
-Plug 'buoto/gotests-vim'
-Plug 'neomake/neomake'
-Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
-Plug 'tpope/vim-fugitive'
 Plug 'artur-shaik/vim-javacomplete2'
-Plug 'leafgarland/typescript-vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'itchyny/lightline.vim'
+Plug 'buoto/gotests-vim'
 Plug 'dag/vim-fish'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'junegunn/fzf.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'fatih/vim-go', { 'branch': 'gocode-change' }
+Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
+Plug 'itchyny/lightline.vim'
 Plug 'jaawerth/nrun.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'kana/vim-submode'
+Plug 'koron/imcsc-vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'neomake/neomake'
 Plug 'niklasl/vim-rdf'
+Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'Shougo/echodoc.vim'
+Plug 'tomasr/molokai'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
