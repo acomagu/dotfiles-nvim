@@ -28,6 +28,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'yami-beta/asyncomplete-gocode.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'jaawerth/nrun.vim'
+Plug 'niklasl/vim-rdf'
 Plug 'posva/vim-vue'
 
 call plug#end()
