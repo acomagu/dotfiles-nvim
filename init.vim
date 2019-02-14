@@ -268,6 +268,7 @@ endfunction
 colorscheme molokai
 syntax on
 set t_Co=256
+set ambiwidth=single
 set backspace=indent,eol,start
 set scrolloff=5
 set noswapfile
@@ -298,7 +299,6 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-set ambiwidth=double
 set hidden
 set completeopt=menuone
 if exists('&ambw')
