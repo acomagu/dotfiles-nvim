@@ -357,8 +357,6 @@ endfunction
 function! CloseLastTerm()
   if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
     :q
-  else
-    :bp|bd! #
   end
 endfunction
 
