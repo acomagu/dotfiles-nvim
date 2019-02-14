@@ -305,7 +305,7 @@ set wrap
 " Hide NetRW buffer
 autocmd FileType netrw setl bufhidden=wipe
 
-" configs of auto insertion list prefix on markdown files
+" configs to insert automatically list prefix on markdown files
 augroup config
   autocmd!
   autocmd FileType markdown inoremap <buffer><expr> <CR> (getline('.') =~ '^\s*-\s') ? '<CR>- ' : '<CR>'
