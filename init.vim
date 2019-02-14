@@ -239,6 +239,7 @@ let g:vim_markdown_folding_disabled = 1
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :enew<CR>
 nnoremap <Leader>q :up<CR>:call CloseBuf()<CR>
+nnoremap <Leader>x :q<CR>
 nnoremap <Leader>c :enew<CR>:call Term()<CR>
 noremap <Leader>h 60h
 noremap <Leader>l 60l
