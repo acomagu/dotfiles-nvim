@@ -206,8 +206,7 @@ autocmd! User FzfStatusLine :
 let g:go_template_autocreate = 0
 
 " vim-clang
-" let g:clang_cpp_options = '-std=c++0x -stdlib=libc++'
-let g:clang_cpp_options = '-std=c++0x -I /home/yuki/.linuxbrew/include'
+let g:clang_cpp_options = '-std=c++0x -stdlib=libc++'
 
 " javacomplete2
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
