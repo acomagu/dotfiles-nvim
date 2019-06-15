@@ -318,6 +318,14 @@ augroup asmfile
   autocmd FileType asm setl tabstop=8
 augroup END
 
+" Go specific settings
+augroup gofile
+  autocmd!
+  autocmd FileType go setl shiftwidth=2
+  autocmd FileType go setl noexpandtab
+  autocmd FileType go setl tabstop=2
+augroup END
+
 " configs to insert automatically list prefix on markdown files
 augroup config
   autocmd!
