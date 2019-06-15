@@ -310,6 +310,14 @@ set wrap
 " Hide NetRW buffer
 autocmd FileType netrw setl bufhidden=wipe
 
+" Assembly specific settings
+augroup asmfile
+  autocmd!
+  autocmd FileType asm setl shiftwidth=8
+  autocmd FileType asm setl noexpandtab
+  autocmd FileType asm setl tabstop=8
+augroup END
+
 " configs to insert automatically list prefix on markdown files
 augroup config
   autocmd!
