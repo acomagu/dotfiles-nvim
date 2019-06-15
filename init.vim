@@ -151,6 +151,7 @@ let g:asyncomplete_log_file = '/tmp/asyncomplete'
 let g:asyncomplete_smart_completion = 0
 
 " vim-go
+let g:go_def_mapping_enabled = 0
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
