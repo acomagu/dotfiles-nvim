@@ -87,7 +87,7 @@ augroup Lsp
   if executable('bingo')
     au User lsp_setup call lsp#register_server({
           \   'name': 'bingo',
-          \   'cmd': {server_info->['bingo']},
+          \   'cmd': {server_info->['bingo', '--cache-style', 'on-demand']},
           \   'whitelist': ['go'],
           \ })
     au FileType go setlocal omnifunc=lsp#complete
