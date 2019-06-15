@@ -153,12 +153,12 @@ let g:asyncomplete_smart_completion = 0
 " vim-go
 let g:go_def_mapping_enabled = 0
 let g:go_fmt_command = "goimports"
+let g:go_highlight_build_constraints = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
 let g:go_term_enabled = 1
-let g:go_highlight_build_constraints = 1
 
 " set key of <Leader>
 let mapleader = "\<Space>"
