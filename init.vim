@@ -272,6 +272,8 @@ set ambiwidth=single
 set autoindent
 set backspace=indent
 set backspace=indent,eol,start
+set breakindent
+set breakindentopt=sbr
 set clipboard=unnamedplus
 set completeopt=menuone
 set expandtab
@@ -293,6 +295,7 @@ set ruler
 set scrolloff=5
 set shiftround
 set shiftwidth=2
+set showbreak=>
 set showmatch
 set showmatch matchtime=1
 set smartcase
