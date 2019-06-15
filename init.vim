@@ -18,6 +18,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-submode'
 Plug 'koron/imcsc-vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'mbbill/undotree'
 Plug 'neomake/neomake'
 Plug 'niklasl/vim-rdf'
 Plug 'plasticboy/vim-markdown'
@@ -298,6 +299,7 @@ set smartindent
 set tabstop=2
 set t_Co=256
 set textwidth=0
+set undofile
 set vb t_vb=
 set wrap
 
