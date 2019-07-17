@@ -14,6 +14,7 @@ Plug 'fatih/vim-go', { 'branch': 'gocode-change' }
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
 Plug 'itchyny/lightline.vim'
 Plug 'jaawerth/nrun.vim'
+Plug 'jeffkreeftmeijer/vim-dim'
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-submode'
 Plug 'koron/imcsc-vim'
@@ -27,7 +28,6 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'Shougo/echodoc.vim'
-Plug 'tomasr/molokai'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 
@@ -264,7 +264,7 @@ function! Tabs()
 endfunction
 
 " nvim
-colorscheme molokai
+colorscheme dim
 syntax on
 set ambiwidth=single
 set autoindent
