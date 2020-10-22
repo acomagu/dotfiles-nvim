@@ -9,6 +9,7 @@ Plug 'arp242/gopher.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'chrisbra/Recover.vim'
 Plug 'dag/vim-fish'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
 Plug 'itchyny/lightline.vim'
