@@ -18,7 +18,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-submode'
 Plug 'koron/imcsc-vim'
 Plug 'mbbill/undotree'
-Plug 'neomake/neomake'
 Plug 'niklasl/vim-rdf'
 Plug 'plasticboy/vim-markdown'
 Plug 'posva/vim-vue'
@@ -31,33 +30,6 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 
 call plug#end()
-
-" neomake
-let g:neomake_cpp_enabled_makers = ['clang']
-let g:neomake_cpp_clang_maker = {
-      \   'exe': 'clang++',
-      \   'args': ['-I/home/yuki/.linuxbrew/include', '-std=c++0x'],
-      \ }
-
-let g:neomake_typescript_enabled_makers = []
-let g:neomake_typescript_tsc_maker = {
-      \   'args': [
-      \     '--noEmit'
-      \   ],
-      \   'append_file': 0,
-      \   'errorformat':
-      \     '%E%f %#(%l\,%c): error %m,' .
-      \     '%E%f %#(%l\,%c): %m,' .
-      \     '%Eerror %m,' .
-      \     '%C%\s%\+%m'
-      \ }
-autocmd! BufWritePost * Neomake
-
-let g:neomake_go_gometalinter_args = ['--config='.$HOME.'/.config/gometalinter/config.json']
-
-let g:neomake_python_enabled_makers = []
-
-au FileType javascript let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
 
 " vim-lsp
 let g:lsp_signs_enabled = 1
