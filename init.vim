@@ -7,7 +7,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'arp242/gopher.vim'
 Plug 'artur-shaik/vim-javacomplete2'
-Plug 'buoto/gotests-vim'
 Plug 'dag/vim-fish'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
