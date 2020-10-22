@@ -5,11 +5,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/echodoc.vim'
+Plug 'arp242/gopher.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'buoto/gotests-vim'
 Plug 'dag/vim-fish'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'fatih/vim-go', { 'branch': 'gocode-change' }
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
 Plug 'itchyny/lightline.vim'
 Plug 'jaawerth/nrun.vim'
@@ -148,16 +148,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 let g:asyncomplete_log_file = '/tmp/asyncomplete'
 let g:asyncomplete_smart_completion = 0
-
-" vim-go
-let g:go_def_mapping_enabled = 0
-let g:go_fmt_command = "goimports"
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_term_enabled = 1
 
 " set key of <Leader>
 let mapleader = "\<Space>"
