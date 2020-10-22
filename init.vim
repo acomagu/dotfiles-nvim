@@ -99,6 +99,14 @@ augroup Lsp
           \ })
     au FileType rust setlocal omnifunc=lsp#complete
   endif
+  if executable('dart')
+    au User lsp_setup call lsp#register_server({
+          \   'name': 'dart',
+          \   'cmd': {server_info->['dart', '/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp']},
+          \   'whitelist': ['dart'],
+          \ })
+    au FileType dart setlocal omnifunc=lsp#complete
+  endif
 augroup END
 
 " asyncomplete
