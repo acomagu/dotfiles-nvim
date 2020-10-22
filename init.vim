@@ -339,7 +339,7 @@ endfunction
 
 function! Term()
   call termopen('fish', {'on_exit': 'OnExit'})
-  setlocal nonumber norelativenumber
+  setlocal nonumber norelativenumber scrolloff=0
 endfunction
 
 function! OnExit(job_id, code, event)
@@ -349,3 +349,5 @@ function! OnExit(job_id, code, event)
 endfunction
 
 autocmd BufLeave * if exists('b:term_title') && exists('b:terminal_job_pid') | file `='term/' . b:terminal_job_pid . '/' . b:term_title`
+
+autocmd BufEnter * if &buftype ==# 'terminal' | set so=0 | else | set so=5 | endif
