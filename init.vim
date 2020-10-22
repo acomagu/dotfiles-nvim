@@ -147,7 +147,7 @@ call submode#map('flc', 'n', '', 'N', 'N')
 
 " fzf.vim
 nnoremap <Leader>b :Buffer<CR>
-nnoremap <Leader>p :GFiles<CR>
+nnoremap <Leader>p :call fzf#run(fzf#wrap({'source': 'ag -l'}))<CR>
 nnoremap <Leader>g y:call GitGrep("")<CR>
 vnoremap <Leader>g y:call GitGrep(@")<CR>
 
