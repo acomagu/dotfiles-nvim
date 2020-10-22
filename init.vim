@@ -153,11 +153,12 @@ vnoremap <Leader>g y:call GitGrep(@")<CR>
 
 function! GitGrep(kwd)
   call fzf#vim#grep(
-        \   'git grep --line-number ""', 0,
+        \   'git grep --line-number ""',
+        \   0,
         \   {
         \     'dir': systemlist('git rev-parse --show-toplevel')[0],
         \     'options': '--query='.shellescape(a:kwd),
-        \   }, 0
+        \   },
         \ )
 endfunction
 
@@ -277,10 +278,11 @@ augroup END
 
 " Go specific settings
 augroup gofile
-  autocmd!
-  autocmd FileType go setl shiftwidth=2
-  autocmd FileType go setl noexpandtab
-  autocmd FileType go setl tabstop=2
+  au!
+  au FileType go setl shiftwidth=2
+  au FileType go setl noexpandtab
+  au FileType go setl tabstop=2
+  au FileType go setl formatprg=goimports
 augroup END
 
 " configs to insert automatically list prefix on markdown files
