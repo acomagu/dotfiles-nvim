@@ -247,9 +247,9 @@ set matchpairs+=<:>
 set matchtime=1
 set matchtime=3
 set nobackup
+set nonumber
 set novisualbell
 set nowritebackup
-set number
 set ruler
 set scrolloff=5
 set shiftround
