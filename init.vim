@@ -35,6 +35,7 @@ call plug#end()
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_text_edit_enabled = 0 " Issue #156
+let g:lsp_async_completion = 1
 nnoremap <C-]> :LspDefinition<CR>
 
 augroup Lsp
