@@ -7,6 +7,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'arp242/gopher.vim'
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'chrisbra/Recover.vim'
 Plug 'dag/vim-fish'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
@@ -275,7 +276,6 @@ set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
 set matchpairs& matchpairs+=<:>
 set matchtime=3
 set nobackup
-set noswapfile
 set novisualbell
 set nowritebackup
 set number
