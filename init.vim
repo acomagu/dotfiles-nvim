@@ -26,7 +26,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'storyn26383/vim-vue'
 Plug 'tomasr/molokai'
-Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
 call plug#end()
