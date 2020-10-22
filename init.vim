@@ -1,7 +1,5 @@
 scriptencoding utf-8
 
-set rtp+=$GHQ_ROOT/github.com/junegunn/fzf
-
 " vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -14,6 +12,7 @@ Plug 'fatih/vim-go', { 'branch': 'gocode-change' }
 Plug 'HerringtonDarkholme/yats.vim' " Typescript syntax highlighting
 Plug 'itchyny/lightline.vim'
 Plug 'jaawerth/nrun.vim'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-submode'
 Plug 'koron/imcsc-vim'
