@@ -230,7 +230,6 @@ colorscheme molokai
 syntax on
 set ambiwidth=single
 set autoindent
-set backspace=indent
 set backspace=indent,eol,start
 set breakindent
 set breakindentopt=sbr
@@ -244,7 +243,8 @@ set incsearch
 set infercase
 set list
 set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
-set matchpairs& matchpairs+=<:>
+set matchpairs+=<:>
+set matchtime=1
 set matchtime=3
 set nobackup
 set novisualbell
@@ -256,14 +256,11 @@ set shiftround
 set shiftwidth=2
 set showbreak=>
 set showmatch
-set showmatch matchtime=1
 set smartcase
 set smartindent
 set tabstop=2
-set t_Co=256
 set textwidth=0
 set undofile
-set vb t_vb=
 set wrap
 
 " Hide NetRW buffer
