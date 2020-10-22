@@ -48,18 +48,12 @@ augroup Lsp
           \ })
     au FileType scala setlocal omnifunc=lsp#complete
   endif
-  " if executable('golsp')
-  "   au User lsp_setup call lsp#register_server({
-  "         \   'name': 'golsp',
-  "         \   'cmd': {server_info->['golsp', '-mode', 'stdio']},
-  "         \   'whitelist': ['go'],
-  "         \ })
-  "   au FileType go setlocal omnifunc=lsp#complete
-  " endif
-  if executable('bingo')
+  if executable('gopls')
     au User lsp_setup call lsp#register_server({
-          \   'name': 'bingo',
-          \   'cmd': {server_info->['bingo', '--cache-style', 'on-demand']},
+          \   'name': 'gopls',
+          \   'cmd': {server_info->['gopls']},
+          \   'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'go.mod'))},
+          \   'initialization_options': {"diagnostics": v:true, 'completeUnimported': v:true, 'matcher': 'fuzzy'},
           \   'whitelist': ['go'],
           \ })
     au FileType go setlocal omnifunc=lsp#complete
