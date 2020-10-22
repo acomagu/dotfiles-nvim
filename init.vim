@@ -83,14 +83,6 @@ augroup Lsp
           \ })
     au FileType javascript setlocal omnifunc=lsp#complete
   endif
-  if executable('javascript-typescript-stdio')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'javascript-typescript-stdio',
-          \   'cmd': {server_info->['javascript-typescript-stdio']},
-          \   'whitelist': ['typescript', 'javascript'],
-          \ })
-    au FileType javascript setlocal omnifunc=lsp#complete
-  endif
   if executable('language_server-ruby')
     au User lsp_setup call lsp#register_server({
           \   'name': 'language_server-ruby',
