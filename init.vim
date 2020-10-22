@@ -71,7 +71,7 @@ augroup Lsp
           \   'name': 'typescript-language-server',
           \   'cmd': {server_info->['typescript-language-server', '--stdio']},
           \   'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-          \   'whitelist': ['typescript'],
+          \   'whitelist': ['typescript', 'typescriptreact'],
           \ })
     au FileType typescript setlocal omnifunc=lsp#complete
   endif
