@@ -248,6 +248,7 @@ set matchtime=1
 set matchtime=3
 set nobackup
 set nonumber
+set notermguicolors
 set novisualbell
 set nowritebackup
 set ruler
