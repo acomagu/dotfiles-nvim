@@ -224,7 +224,7 @@ endfunction
 
 " nvim
 colorscheme molokai
-syntax on
+syntax off
 set ambiwidth=single
 set autoindent
 set backspace=indent,eol,start
