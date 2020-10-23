@@ -1,35 +1,36 @@
 scriptencoding utf-8
 
-" vim-plug
-call plug#begin('~/.local/share/nvim/plugged')
-
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Shougo/echodoc.vim'
-Plug 'arp242/gopher.vim'
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'chrisbra/Recover.vim'
-Plug 'dag/vim-fish'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'itchyny/lightline.vim'
-Plug 'jaawerth/nrun.vim'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'kana/vim-submode'
-Plug 'koron/imcsc-vim'
-Plug 'mbbill/undotree'
-Plug 'niklasl/vim-rdf'
-Plug 'plasticboy/vim-markdown'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'storyn26383/vim-vue'
-Plug 'tomasr/molokai'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-
-call plug#end()
+" minpac
+packadd minpac
+call minpac#init()
+call minpac#add('AndrewRadev/splitjoin.vim')
+call minpac#add('Shougo/echodoc.vim')
+call minpac#add('arp242/gopher.vim')
+call minpac#add('artur-shaik/vim-javacomplete2')
+call minpac#add('chrisbra/Recover.vim')
+call minpac#add('dag/vim-fish')
+call minpac#add('dart-lang/dart-vim-plugin')
+call minpac#add('editorconfig/editorconfig-vim')
+call minpac#add('itchyny/lightline.vim')
+call minpac#add('jaawerth/nrun.vim')
+call minpac#add('junegunn/fzf')
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('kana/vim-submode')
+call minpac#add('koron/imcsc-vim')
+call minpac#add('mbbill/undotree')
+call minpac#add('niklasl/vim-rdf')
+call minpac#add('plasticboy/vim-markdown')
+call minpac#add('prabirshrestha/async.vim')
+call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
+call minpac#add('prabirshrestha/asyncomplete.vim')
+call minpac#add('prabirshrestha/vim-lsp')
+call minpac#add('storyn26383/vim-vue')
+call minpac#add('tomasr/molokai')
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('yami-beta/asyncomplete-omni.vim')
+packloadall
 
 " vim-lsp
 let g:lsp_signs_enabled = 1
