@@ -19,12 +19,11 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('kana/vim-submode')
 call minpac#add('koron/imcsc-vim')
 call minpac#add('mbbill/undotree')
+call minpac#add('neovim/nvim-lsp')
 call minpac#add('niklasl/vim-rdf')
+call minpac#add('nvim-lua/completion-nvim')
 call minpac#add('plasticboy/vim-markdown')
 call minpac#add('prabirshrestha/async.vim')
-call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
-call minpac#add('prabirshrestha/asyncomplete.vim')
-call minpac#add('prabirshrestha/vim-lsp')
 call minpac#add('storyn26383/vim-vue')
 call minpac#add('tomasr/molokai')
 call minpac#add('tpope/vim-commentary')
@@ -32,93 +31,15 @@ call minpac#add('tpope/vim-fugitive')
 call minpac#add('yami-beta/asyncomplete-omni.vim')
 packloadall
 
-" vim-lsp
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_text_edit_enabled = 0 " Issue #156
-let g:lsp_async_completion = 1
-nnoremap <C-]> :LspDefinition<CR>
-
-augroup Lsp
-  au!
-  if executable('coursier')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'scala-languageserver',
-          \   'cmd': {server_info->['coursier', 'launch', '-r', 'https://dl.bintray.com/dhpcs/maven', '-r', 'sonatype:releases', 'com.github.dragos:languageserver_2.11:0.1.3']},
-          \   'whitelist': ['scala'],
-          \ })
-    au FileType scala setlocal omnifunc=lsp#complete
-  endif
-  if executable('gopls')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'gopls',
-          \   'cmd': {server_info->['gopls']},
-          \   'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'go.mod'))},
-          \   'initialization_options': {"diagnostics": v:true, 'completeUnimported': v:true, 'matcher': 'fuzzy'},
-          \   'whitelist': ['go'],
-          \ })
-    au FileType go setlocal omnifunc=lsp#complete
-  endif
-  if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'pyls',
-          \   'cmd': {server_info->['pyls']},
-          \   'whitelist': ['python'],
-          \ })
-    au FileType python setlocal omnifunc=lsp#complete
-  endif
-  if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'typescript-language-server',
-          \   'cmd': {server_info->['typescript-language-server', '--stdio']},
-          \   'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-          \   'whitelist': ['typescript', 'typescriptreact'],
-          \ })
-    au FileType typescript setlocal omnifunc=lsp#complete
-  endif
-  if executable('js-langserver')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'js-langserver',
-          \   'cmd': {server_info->['js-langserver', '--stdio']},
-          \   'whitelist': ['javascript'],
-          \ })
-    au FileType javascript setlocal omnifunc=lsp#complete
-  endif
-  if executable('language_server-ruby')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'language_server-ruby',
-          \   'cmd': {server_info->['language_server-ruby']},
-          \   'whitelist': ['ruby'],
-          \ })
-    au FileType ruby setlocal omnifunc=lsp#complete
-  endif
-  if executable('rls')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'rls',
-          \   'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-          \   'whitelist': ['rust'],
-          \ })
-    au FileType rust setlocal omnifunc=lsp#complete
-  endif
-  if executable('dart')
-    au User lsp_setup call lsp#register_server({
-          \   'name': 'dart',
-          \   'cmd': {server_info->['dart', '/opt/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp']},
-          \   'whitelist': ['dart'],
-          \ })
-    au FileType dart setlocal omnifunc=lsp#complete
-  endif
-augroup END
-
-" asyncomplete
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-let g:asyncomplete_log_file = '/tmp/asyncomplete'
-let g:asyncomplete_smart_completion = 0
-
 " set key of <Leader>
 let mapleader = "\<Space>"
+
+" completion-nvim
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <silent> <C-x><C-o> <Plug>(completion_trigger)
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
 
 " echodoc
 let g:echodoc#enable_at_startup = 1
@@ -232,7 +153,6 @@ set backspace=indent,eol,start
 set breakindent
 set breakindentopt=sbr
 set clipboard=unnamedplus
-set completeopt=menuone
 set expandtab
 set hidden
 set hlsearch
@@ -261,6 +181,22 @@ set tabstop=2
 set textwidth=0
 set undofile
 set wrap
+
+" nvim_lsp
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+if executable('typescript-language-server')
+  lua require'lspconfig'.tsserver.setup{
+        \   filetypes = {"typescript", "typescriptreact", "typescript.tsx"};
+        \   on_attach=require'completion'.on_attach;
+        \ }
+en
+if executable('gopls')
+  lua require'lspconfig'.gopls.setup{
+        \   on_attach=require'completion'.on_attach;
+        \ }
+en
+
+nnoremap <Leader>i <cmd>lua vim.lsp.buf.hover()<CR><cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 " Hide NetRW buffer
 autocmd FileType netrw setl bufhidden=wipe
