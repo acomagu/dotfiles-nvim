@@ -26,7 +26,7 @@ call minpac#add('plasticboy/vim-markdown')
 call minpac#add('prabirshrestha/async.vim')
 call minpac#add('storyn26383/vim-vue')
 call minpac#add('tomasr/molokai')
-call minpac#add('tpope/vim-commentary')
+call minpac#add('tomtom/tcomment_vim')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('yami-beta/asyncomplete-omni.vim')
 packloadall
