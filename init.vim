@@ -153,6 +153,7 @@ set backspace=indent,eol,start
 set breakindent
 set breakindentopt=sbr
 set clipboard=unnamedplus
+set directory^=$XDG_DATA_HOME/nvim/swap//
 set expandtab
 set hidden
 set hlsearch
@@ -164,7 +165,6 @@ set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
 set matchpairs+=<:>
 set matchtime=1
 set matchtime=3
-set nobackup
 set nonumber
 set notermguicolors
 set novisualbell
@@ -180,6 +180,7 @@ set smartindent
 set tabstop=2
 set textwidth=0
 set undofile
+set updatetime=500
 set wrap
 
 " nvim_lsp
