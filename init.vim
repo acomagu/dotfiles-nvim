@@ -167,6 +167,7 @@ set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
 set matchpairs+=<:>
 set matchtime=1
 set matchtime=3
+set mouse=a
 set nonumber
 set notermguicolors
 set novb
