@@ -116,22 +116,22 @@ endfunction
 let g:vim_markdown_folding_disabled = 1
 
 " other custom keymaps
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>e :enew<CR>
-nnoremap <Leader>q :up<CR>:call CloseBuf()<CR>
-nnoremap <Leader>x :q<CR>
-nnoremap <Leader>c :enew<CR>:call Term()<CR>
-noremap <Leader>h 60h
-noremap <Leader>l 60l
-noremap <Leader>k 15k
-noremap <Leader>j 15j
-noremap <C-j> <Esc>:noh<CR>
-noremap! <C-j> <Esc>:noh<CR>
+nnoremap <silent> <Leader>w :w<CR>
+nnoremap <silent> <Leader>e :enew<CR>
+nnoremap <silent> <Leader>q :up<CR>:call CloseBuf()<CR>
+nnoremap <silent> <Leader>x :q<CR>
+nnoremap <silent> <Leader>c :enew<CR>:call Term()<CR>
+noremap <silent> <Leader>h 60h
+noremap <silent> <Leader>l 60l
+noremap <silent> <Leader>k 15k
+noremap <silent> <Leader>j 15j
+noremap <silent> <C-j> <Esc>:noh<CR>
+noremap! <silent> <C-j> <Esc>:noh<CR>
 noremap n nzz
 tnoremap <C-j> <C-\><C-n>
 vnoremap // <Esc>/\%V
-nnoremap <Leader>t :call Tabs()<CR>
-nnoremap <Leader>n :tab split<CR>
+nnoremap <silent> <Leader>t :call Tabs()<CR>
+nnoremap <silent> <Leader>n :tab split<CR>
 
 function! Tabs()
     let tabs = map(gettabinfo(), {_, v -> v['tabnr']})
