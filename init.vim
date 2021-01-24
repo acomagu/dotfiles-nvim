@@ -168,6 +168,7 @@ set matchtime=1
 set matchtime=3
 set nonumber
 set notermguicolors
+set novb
 set novisualbell
 set nowritebackup
 set ruler
