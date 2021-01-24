@@ -28,6 +28,7 @@ call minpac#add('storyn26383/vim-vue')
 call minpac#add('tomasr/molokai')
 call minpac#add('tomtom/tcomment_vim')
 call minpac#add('tpope/vim-fugitive')
+call minpac#add('wakatime/vim-wakatime')
 call minpac#add('yami-beta/asyncomplete-omni.vim')
 packloadall
 
