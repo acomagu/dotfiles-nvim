@@ -180,10 +180,16 @@ set showmatch
 set smartcase
 set smartindent
 set tabstop=2
+set termguicolors
 set textwidth=0
 set undofile
 set updatetime=500
 set wrap
+
+" nvim colors
+hi Normal guifg=#bbbbbb guibg=black
+" Change the default background of floating window.
+hi NormalFloat guibg=#444444 guifg=#ffffff ctermbg=238 ctermfg=7
 
 " nvim_lsp
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
