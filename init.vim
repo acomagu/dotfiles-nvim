@@ -160,6 +160,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set infercase
+set laststatus=0
 set list
 set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
 set matchpairs+=<:>
