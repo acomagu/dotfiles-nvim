@@ -295,6 +295,12 @@ function! OnExit(job_id, code, event)
   endif
 endfunction
 
+augroup no_cursor_move_on_focus
+  au!
+  au FocusLost * let g:oldmouse=&mouse | set mouse=
+  au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
+augroup END
+
 autocmd BufLeave * if exists('b:term_title') && exists('b:terminal_job_pid') | file `='term/' . b:terminal_job_pid . '/' . b:term_title`
 
 autocmd BufEnter * if &buftype ==# 'terminal' | set so=0 | else | set so=5 | endif
