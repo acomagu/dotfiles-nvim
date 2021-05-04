@@ -189,7 +189,7 @@ set updatetime=500
 set wrap
 
 " nvim colors
-hi Normal guifg=#bbbbbb guibg=black
+hi Normal guifg=#ffffff guibg=black
 " Change the default background of floating window.
 hi NormalFloat guibg=#444444 guifg=#ffffff ctermbg=238 ctermfg=7
 
