@@ -181,7 +181,6 @@ set laststatus=0
 set list
 set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
 set matchpairs+=<:>
-set matchtime=1
 set matchtime=3
 set mouse=a
 set nonumber
