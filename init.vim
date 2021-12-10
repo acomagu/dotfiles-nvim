@@ -11,6 +11,11 @@ call minpac#add('chrisbra/Recover.vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('dart-lang/dart-vim-plugin')
 call minpac#add('editorconfig/editorconfig-vim')
+call minpac#add('hrsh7th/cmp-calc')
+call minpac#add('hrsh7th/cmp-nvim-lsp')
+call minpac#add('hrsh7th/cmp-path')
+call minpac#add('hrsh7th/nvim-cmp')
+call minpac#add('hrsh7th/vim-vsnip')
 call minpac#add('itchyny/lightline.vim')
 call minpac#add('jaawerth/nrun.vim')
 call minpac#add('junegunn/fzf')
@@ -21,26 +26,41 @@ call minpac#add('koron/imcsc-vim')
 call minpac#add('mbbill/undotree')
 call minpac#add('neovim/nvim-lsp')
 call minpac#add('niklasl/vim-rdf')
-call minpac#add('nvim-lua/completion-nvim')
 call minpac#add('plasticboy/vim-markdown')
-call minpac#add('prabirshrestha/async.vim')
 call minpac#add('storyn26383/vim-vue')
 call minpac#add('tomasr/molokai')
 call minpac#add('tomtom/tcomment_vim')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('wakatime/vim-wakatime')
-call minpac#add('yami-beta/asyncomplete-omni.vim')
 packloadall
 
 " set key of <Leader>
 let mapleader = "\<Space>"
 
-" completion-nvim
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-imap <silent> <C-x><C-o> <Plug>(completion_trigger)
-set completeopt=menuone,noinsert,noselect
-set shortmess+=c
+" nvim-cmp
+lua <<EOF
+local cmp = require('cmp')
+cmp.setup {
+  preselect = cmp.PreselectMode.None,
+  mapping = {
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<C-x><C-o>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+  },
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  sources = {
+    { name = 'calc' },
+    { name = 'nvim_lsp' },
+    { name = 'path' },
+    { name = 'vsnip' },
+  },
+}
+EOF
 
 " echodoc
 let g:echodoc#enable_at_startup = 1
@@ -89,9 +109,6 @@ let g:go_template_autocreate = 0
 
 " vim-clang
 let g:clang_cpp_options = '-std=c++0x -stdlib=libc++'
-
-" javacomplete2
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " lightline.vim
 set noshowmode
@@ -194,16 +211,20 @@ hi Normal guifg=#ffffff guibg=black
 hi NormalFloat guibg=#444444 guifg=#ffffff ctermbg=238 ctermfg=7
 
 " nvim_lsp
+
+" Enlarge the capabilities powered by nvim-cmp.
+lua capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 if executable('typescript-language-server')
   lua require'lspconfig'.tsserver.setup{
+        \   capabilities = capabilities;
         \   filetypes = {"typescript", "typescriptreact", "typescript.tsx"};
-        \   on_attach=require'completion'.on_attach;
         \ }
 en
 if executable('gopls')
   lua require'lspconfig'.gopls.setup{
-        \   on_attach=require'completion'.on_attach;
+        \   capabilities = capabilities;
         \ }
 en
 
