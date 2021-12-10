@@ -204,6 +204,9 @@ set undofile
 set updatetime=500
 set wrap
 
+" Filetypes
+au BufRead,BufNewFile *.graphql setfiletype graphql
+
 " nvim colors
 hi Normal guifg=#ffffff guibg=black
 " Change the default background of floating window.
@@ -223,6 +226,11 @@ if executable('typescript-language-server')
 en
 if executable('gopls')
   lua require'lspconfig'.gopls.setup{
+        \   capabilities = capabilities;
+        \ }
+en
+if executable('graphql-lsp')
+  lua require'lspconfig'.graphql.setup{
         \   capabilities = capabilities;
         \ }
 en
