@@ -222,6 +222,9 @@ if executable('typescript-language-server')
   lua require'lspconfig'.tsserver.setup{
         \   capabilities = capabilities;
         \   filetypes = {"typescript", "typescriptreact", "typescript.tsx"};
+        \   flags = {
+        \     debounce_text_changes = 500;
+        \   };
         \ }
 en
 if executable('gopls')
