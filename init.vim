@@ -239,6 +239,7 @@ if executable('graphql-lsp')
 en
 
 nnoremap <Leader>i <cmd>lua vim.lsp.buf.hover()<CR><cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+inoremap <M-i> <cmd>lua vim.lsp.buf.signature_help()<CR>
 
 " Hide NetRW buffer
 autocmd FileType netrw setl bufhidden=wipe
