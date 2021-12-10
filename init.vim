@@ -135,7 +135,7 @@ let g:vim_markdown_folding_disabled = 1
 " other custom keymaps
 nnoremap <silent> <Leader>w :w<CR>
 nnoremap <silent> <Leader>e :enew<CR>
-nnoremap <silent> <Leader>q :up<CR>:call CloseBuf()<CR>
+nnoremap <silent> <Leader>q :up<CR>:bp \| bd #<CR>
 nnoremap <silent> <Leader>x :q<CR>
 nnoremap <silent> <Leader>c :enew<CR>:call Term()<CR>
 noremap <silent> <Leader>h 60h
@@ -290,36 +290,10 @@ function! ImInActivate()
   call system('fcitx-remote -c')
 endfunction
 
-function! CloseBuf()
-  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    :q
-  else
-    :bp|bd #
-  endif
-endfunction
-
-function! CloseLastTerm()
-  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    :q
-  end
-endfunction
-
 function! Term()
-  call termopen('fish', {'on_exit': 'OnExit'})
+  call termopen('fish')
   setlocal nonumber norelativenumber scrolloff=0
 endfunction
-
-function! OnExit(job_id, code, event)
-  if a:code == 0
-    call CloseLastTerm()
-  endif
-endfunction
-
-augroup no_cursor_move_on_focus
-  au!
-  au FocusLost * let g:oldmouse=&mouse | set mouse=
-  au FocusGained * if exists('g:oldmouse') | let &mouse=g:oldmouse | unlet g:oldmouse | endif
-augroup END
 
 autocmd BufLeave * if exists('b:term_title') && exists('b:terminal_job_pid') | file `='term/' . b:terminal_job_pid . '/' . b:term_title`
 
