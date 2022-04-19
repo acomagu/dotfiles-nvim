@@ -16,6 +16,7 @@ call minpac#add('hrsh7th/cmp-path')
 call minpac#add('hrsh7th/nvim-cmp')
 call minpac#add('hrsh7th/vim-vsnip')
 call minpac#add('itchyny/lightline.vim')
+call minpac#add('j-hui/fidget.nvim')
 call minpac#add('jaawerth/nrun.vim')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
@@ -25,6 +26,8 @@ call minpac#add('koron/imcsc-vim')
 call minpac#add('mbbill/undotree')
 call minpac#add('neovim/nvim-lsp')
 call minpac#add('niklasl/vim-rdf')
+call minpac#add('petertriho/nvim-scrollbar')
+call minpac#add('pierreglaser/folding-nvim')
 call minpac#add('plasticboy/vim-markdown')
 call minpac#add('storyn26383/vim-vue')
 call minpac#add('tomasr/molokai')
@@ -132,6 +135,12 @@ endfunction
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
 
+" nvim-scrollbar
+lua require('scrollbar').setup()
+
+" fidget
+lua require('fidget').setup({})
+
 " other custom keymaps
 nnoremap <silent> <Leader>w :w<CR>
 nnoremap <silent> <Leader>e :enew<CR>
@@ -183,6 +192,7 @@ set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
 set matchpairs+=<:>
 set matchtime=3
 set mouse=a
+set nofoldenable
 set nonumber
 set notermguicolors
 set novb
@@ -215,11 +225,25 @@ hi NormalFloat guibg=#444444 guifg=#ffffff ctermbg=238 ctermfg=7
 
 " Enlarge the capabilities powered by nvim-cmp.
 lua capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+lua <<EOF
+on_attach = function(client, bufnr)
+  if client.resolved_capabilities.goto_definition == true then
+    vim.api.nvim_buf_set_option(bufnr, 'tagfunc', 'v:lua.vim.lsp.tagfunc')
+  end
+
+  if client.resolved_capabilities.document_formatting == true then
+    vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+  end
+
+  require('folding').on_attach()
+end
+EOF
 
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 if executable('typescript-language-server')
   lua require'lspconfig'.tsserver.setup{
         \   capabilities = capabilities;
+        \   on_attach = on_attach;
         \   filetypes = {"typescript", "typescriptreact", "typescript.tsx"};
         \   flags = {
         \     debounce_text_changes = 500;
@@ -229,16 +253,38 @@ en
 if executable('gopls')
   lua require'lspconfig'.gopls.setup{
         \   capabilities = capabilities;
+        \   on_attach = on_attach;
         \ }
 en
 if executable('graphql-lsp')
   lua require'lspconfig'.graphql.setup{
         \   capabilities = capabilities;
+        \   on_attach = on_attach;
         \ }
 en
 
 nnoremap <Leader>i <cmd>lua vim.lsp.buf.hover()<CR><cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 inoremap <M-i> <cmd>lua vim.lsp.buf.signature_help()<CR>
+
+" https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#peek-definition
+lua <<EOF
+local function preview_location_callback(_, method, result)
+  if result == nil or vim.tbl_isempty(result) then
+    vim.lsp.log.info(method, 'No location found')
+    return nil
+  end
+  if vim.tbl_islist(result) then
+    vim.lsp.util.preview_location(result[1])
+  else
+    vim.lsp.util.preview_location(result)
+  end
+end
+
+function peek_definition()
+  local params = vim.lsp.util.make_position_params()
+  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+end
+EOF
 
 " Hide NetRW buffer
 autocmd FileType netrw setl bufhidden=wipe
@@ -306,6 +352,6 @@ function! Term()
   setlocal nonumber norelativenumber scrolloff=0
 endfunction
 
-autocmd BufLeave * if exists('b:term_title') && exists('b:terminal_job_pid') | file `='term/' . b:terminal_job_pid . '/' . b:term_title`
+" autocmd BufLeave * if exists('b:term_title') && exists('b:terminal_job_pid') | file `='term/' . b:terminal_job_pid . '/' . b:term_title`
 
 autocmd BufEnter * if &buftype ==# 'terminal' | set so=0 | else | set so=5 | endif
