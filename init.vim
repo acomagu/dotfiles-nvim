@@ -173,18 +173,11 @@ endfunction
 " nvim
 colorscheme molokai
 syntax off
-set ambiwidth=single
-set autoindent
-set backspace=indent,eol,start
 set breakindent
 set breakindentopt=sbr
 set clipboard=unnamedplus
-set directory^=$XDG_DATA_HOME/nvim/swap//
 set expandtab
-set hidden
-set hlsearch
 set ignorecase
-set incsearch
 set infercase
 set laststatus=0
 set list
@@ -194,11 +187,6 @@ set matchtime=3
 set mouse=a
 set nofoldenable
 set nonumber
-set notermguicolors
-set novb
-set novisualbell
-set nowritebackup
-set ruler
 set scrolloff=5
 set shiftround
 set shiftwidth=2
@@ -208,10 +196,7 @@ set smartcase
 set smartindent
 set tabstop=2
 set termguicolors
-set textwidth=0
 set undofile
-set updatetime=500
-set wrap
 
 " Filetypes
 au BufRead,BufNewFile *.graphql setfiletype graphql
