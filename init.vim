@@ -221,7 +221,7 @@ noremap <silent> <C-0> :call ZoomSet(11)<CR>
 " nvim_lsp
 
 " Enlarge the capabilities powered by nvim-cmp.
-lua capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+lua capabilities = require('cmp_nvim_lsp').default_capabilities()
 lua <<EOF
 on_attach = function(client, bufnr)
   if client.resolved_capabilities.goto_definition == true then
