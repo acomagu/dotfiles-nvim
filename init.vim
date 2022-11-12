@@ -179,6 +179,7 @@ set matchtime=3
 set mouse=a
 set nofoldenable
 set nonumber
+set noshowmode
 set scrolloff=5
 set shiftround
 set shiftwidth=2
