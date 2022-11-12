@@ -18,14 +18,11 @@ call minpac#add('hrsh7th/cmp-nvim-lsp')
 call minpac#add('hrsh7th/cmp-path')
 call minpac#add('hrsh7th/nvim-cmp')
 call minpac#add('hrsh7th/vim-vsnip')
-call minpac#add('itchyny/lightline.vim')
 call minpac#add('j-hui/fidget.nvim')
-call minpac#add('jaawerth/nrun.vim')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('kana/vim-submode')
-call minpac#add('koron/imcsc-vim')
 call minpac#add('mbbill/undotree')
 call minpac#add('neovim/nvim-lsp')
 call minpac#add('niklasl/vim-rdf')
@@ -126,26 +123,6 @@ let g:go_template_autocreate = 0
 
 " vim-clang
 let g:clang_cpp_options = '-std=c++0x -stdlib=libc++'
-
-" lightline.vim
-set noshowmode
-let g:lightline = {
-      \   'colorscheme': 'wombat',
-      \   'component_function': {
-      \       'mode': 'LightlineMode',
-      \       'filename': 'LightlineFilename',
-      \   },
-      \ }
-
-function! LightlineMode()
-  return &filetype ==# 'fzf' ? 'FZF' :
-        \ lightline#mode()
-endfunction
-
-function! LightlineFilename()
-  return &filetype ==# 'fzf' ? '' :
-        \ fnamemodify(expand('%'), ':~:.') !=# '' ? fnamemodify(expand('%'), ':~:.') : '[No Name]'
-endfunction
 
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
@@ -356,15 +333,6 @@ function! s:GetBufByte()
   else
     return byte - 1
   endif
-endfunction
-
-augroup OpIME
-  autocmd!
-  autocmd InsertLeave * call ImInActivate()
-augroup END
-
-function! ImInActivate()
-  call system('fcitx-remote -c')
 endfunction
 
 function! Term()
