@@ -23,10 +23,10 @@ call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('kana/vim-submode')
+call minpac#add('lewis6991/satellite.nvim')
 call minpac#add('mbbill/undotree')
 call minpac#add('neovim/nvim-lsp')
 call minpac#add('niklasl/vim-rdf')
-call minpac#add('petertriho/nvim-scrollbar')
 call minpac#add('pierreglaser/folding-nvim')
 call minpac#add('plasticboy/vim-markdown')
 call minpac#add('storyn26383/vim-vue')
@@ -126,8 +126,8 @@ let g:clang_cpp_options = '-std=c++0x -stdlib=libc++'
 " vim-markdown
 let g:vim_markdown_folding_disabled = 1
 
-" nvim-scrollbar
-lua require('scrollbar').setup()
+" satellite-nvim
+lua require('satellite').setup()
 
 " fidget
 lua require('fidget').setup({})
