@@ -30,7 +30,6 @@ call minpac#add('petertriho/nvim-scrollbar')
 call minpac#add('pierreglaser/folding-nvim')
 call minpac#add('plasticboy/vim-markdown')
 call minpac#add('storyn26383/vim-vue')
-call minpac#add('tomasr/molokai')
 call minpac#add('tomtom/tcomment_vim')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('wakatime/vim-wakatime')
@@ -163,8 +162,8 @@ function! Tabs()
 endfunction
 
 " nvim
-colorscheme molokai
-syntax off
+colorscheme mycolor
+syntax on
 set breakindent
 set breakindentopt=sbr
 set clipboard=unnamedplus
@@ -195,7 +194,6 @@ set undofile
 au BufRead,BufNewFile *.graphql setfiletype graphql
 
 " nvim colors
-hi Normal guifg=#ffffff guibg=black
 " Change the default background of floating window.
 hi NormalFloat guibg=#444444 guifg=#ffffff ctermbg=238 ctermfg=7
 
