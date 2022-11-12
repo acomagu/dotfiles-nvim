@@ -1,5 +1,7 @@
 scriptencoding utf-8
 
+" let g:copilot_no_tab_map = v:true
+
 " minpac
 packadd minpac
 call minpac#init()
@@ -10,6 +12,7 @@ call minpac#add('chrisbra/Recover.vim')
 call minpac#add('dag/vim-fish')
 call minpac#add('dart-lang/dart-vim-plugin')
 call minpac#add('editorconfig/editorconfig-vim')
+" call minpac#add('github/copilot.vim')
 call minpac#add('hrsh7th/cmp-calc')
 call minpac#add('hrsh7th/cmp-nvim-lsp')
 call minpac#add('hrsh7th/cmp-path')
@@ -38,6 +41,10 @@ packloadall
 
 " set key of <Leader>
 let mapleader = "\<Space>"
+
+" " copilot-vim
+" let g:copilot_node_command = $ASDF_DATA_DIR . '/installs/nodejs/lts-gallium/bin/node'
+" imap <silent><script><expr> <C-f> copilot#Accept("\<CR>")
 
 " nvim-cmp
 lua <<EOF
