@@ -68,6 +68,14 @@ cmp.setup {
     { name = 'path' },
     { name = 'vsnip' },
   },
+  view = {
+    entries = 'native',
+  },
+  window = {
+    documentation = {
+      max_width = 100,
+    },
+  },
 }
 EOF
 
@@ -184,6 +192,7 @@ set breakindent
 set breakindentopt=sbr
 set clipboard=unnamedplus
 set expandtab
+set guifont=Source\ Code\ Pro\ Regular:h11
 set ignorecase
 set infercase
 set laststatus=0
@@ -212,6 +221,25 @@ au BufRead,BufNewFile *.graphql setfiletype graphql
 hi Normal guifg=#ffffff guibg=black
 " Change the default background of floating window.
 hi NormalFloat guibg=#444444 guifg=#ffffff ctermbg=238 ctermfg=7
+
+" Remove all statuslines
+if exists('g:gonvim_running')
+  let &statusline='%#Normal# '
+endif
+
+" Zoom-in / Zoom-out
+function! Zoom(amount) abort
+  call ZoomSet(matchstr(&guifont, '\d\+$') + a:amount)
+endfunc
+
+" Sets the font size to `font_size`
+function ZoomSet(font_size) abort
+  let &guifont = substitute(&guifont, '\d\+$', a:font_size, '')
+endfunc
+
+noremap <silent> <C-+> :call Zoom(v:count1)<CR>
+noremap <silent> <C--> :call Zoom(-v:count1)<CR>
+noremap <silent> <C-0> :call ZoomSet(11)<CR>
 
 " nvim_lsp
 
