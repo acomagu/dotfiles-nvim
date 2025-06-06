@@ -123,7 +123,7 @@ vim.keymap.set('n',']d',vim.diagnostic.goto_next,{silent=true})
 vim.keymap.set({'n','i'},'<C-j>','<Esc>:noh<CR>',{silent=true})
 vim.keymap.set('n','n','nzz')
 vim.keymap.set('t','<C-j>','<C-\\><C-n>')
-vim.keymap.set('v','//','<Esc>/\%V',{remap=true})
+-- vim.keymap.set('v','//','<Esc>/\%V',{remap=true})
 
 function _G.GitGrep(kwd)
   vim.fn['fzf#vim#grep']('git grep --line-number ""',0,{dir=vim.fn.systemlist('git rev-parse --show-toplevel')[1],options='--query='..vim.fn.shellescape(kwd)})
@@ -172,8 +172,8 @@ map('winsize','n','','>','<C-w>>')
 map('winsize','n','','<','<C-w><')
 map('winsize','n','','+','<C-w>-')
 map('winsize','n','','-','<C-w>+')
-vim.keymap.set('n','f',function() return 'lv$<Esc>/\%V['..string.char(vim.fn.getchar())..']<CR><Plug>(flc)' end,{expr=true})
-vim.keymap.set('n','F',function() return 'hv0<Esc>?\%V['..string.char(vim.fn.getchar())..']<CR><Plug>(flc)' end,{expr=true})
+-- vim.keymap.set('n','f',function() return 'lv$<Esc>/\%V['..string.char(vim.fn.getchar())..']<CR><Plug>(flc)' end,{expr=true})
+-- vim.keymap.set('n','F',function() return 'hv0<Esc>?\%V['..string.char(vim.fn.getchar())..']<CR><Plug>(flc)' end,{expr=true})
 enter('flc','n','','<Plug>(flc)',':autocmd flc InsertEnter * noh<CR>')
 map('flc','n','','n','n')
 map('flc','n','','N','N')
@@ -214,14 +214,14 @@ local config_grp=vim.api.nvim_create_augroup('config',{clear=true})
 vim.api.nvim_create_autocmd('FileType',{group=config_grp,pattern='markdown',callback=function()
   vim.keymap.set('i','<CR>',function()
     local l=vim.fn.getline('.')
-    if l:match('^%s*-\s') then return '<CR>- ' end
-    if l:match('^%s*\*\s') then return '<CR>* ' end
+    -- if l:match('^%s*-\s') then return '<CR>- ' end
+    -- if l:match('^%s*\*\s') then return '<CR>* ' end
     return '<CR>'
   end,{buffer=true,expr=true})
   vim.keymap.set('n','o',function()
     local l=vim.fn.getline('.')
-    if l:match('^%s*-\s') then return 'o- ' end
-    if l:match('^%s*\*\s') then return 'o* ' end
+    -- if l:match('^%s*-\s') then return 'o- ' end
+    -- if l:match('^%s*\*\s') then return 'o* ' end
     return 'o'
   end,{buffer=true,expr=true})
 end})
@@ -328,8 +328,8 @@ vim.api.nvim_create_user_command('Qf',function(opts)
   local start_line=vim.fn.line("'<")
   local end_line=vim.fn.line("'>")
   local lines=vim.fn.getline(start_line,end_line)
-  local gqlfmt='%E%*\sError\ %n:\ %m,%Z%*\sat\ %f:%l:%c'
-  local tscfmt='%E%f(%l\,%c):\ error\ %m,%C\ \ %m'
+  -- local gqlfmt='%E%*\sError\ %n:\ %m,%Z%*\sat\ %f:%l:%c'
+  -- local tscfmt='%E%f(%l\,%c):\ error\ %m,%C\ \ %m'
   vim.ui.select({'graphql-codegen','tsc'},{},function(choice)
     local efm=choice=='graphql-codegen' and gqlfmt or choice=='tsc' and tscfmt or nil
     if not efm then vim.notify('error'); return end
