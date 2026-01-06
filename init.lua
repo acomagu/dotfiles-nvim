@@ -198,6 +198,7 @@ require('lazy').setup({
       end
       vim.keymap.set('n', '<Leader>b', ':Buffers<CR>', { silent = true })
       vim.keymap.set('n', '<Leader>p', [[<Cmd>call fzf#run(fzf#wrap({'source': 'ag -l'}))<CR>]], { silent = true, noremap = true })
+      vim.keymap.set('n', '<C-p>', ':Files<CR>', { silent = true, noremap = true })
       vim.keymap.set('n', '<Leader>g', function() GitGrep('') end, { silent = true })
       vim.keymap.set('v', '<Leader>g', function() GitGrep(vim.fn.getreg('"')) end, { silent = true })
       vim.api.nvim_create_autocmd('User', { pattern = 'FzfStatusLine', command = ':' })
