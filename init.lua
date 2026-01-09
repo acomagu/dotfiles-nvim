@@ -15,8 +15,8 @@ vim.cmd('syntax on')
 local opt = vim.opt
 opt.breakindent = true
 opt.breakindentopt = 'sbr'
--- opt.clipboard = 'unnamedplus'
-opt.clipboard = '' -- Copy to clipboard by autocmd.
+-- 空にすると、yank/pasteは+registerを使わない(unnamedplusにするとyank/pasteが+registerに寄る)
+opt.clipboard = ''
 opt.expandtab = true
 opt.foldenable = false
 opt.guifont = 'Source Code Pro Regular:h11'
@@ -43,36 +43,38 @@ opt.title = true
 opt.titlestring = '%{fnamemodify(getcwd(),":t")}: %t'
 opt.undofile = true
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    local ev = vim.v.event
-    if ev.operator == 'y' then
-      local lines = vim.fn.getreg(ev.regname ~= '' and ev.regname or '"', 1, true)
-      require('vim.ui.clipboard.osc52').copy('+')(lines, nil)
-    end
-  end,
-})
-
-local osc52 = require('vim.ui.clipboard.osc52')
-
-vim.g.clipboard = {
-  name = 'osc52+wl-paste',
-  copy = {
-    ['+'] = osc52.copy('+'),
-    ['*'] = osc52.copy('*'),
-  },
-  paste = {
-    ['+'] = function()
-      local ok, out = pcall(vim.fn.systemlist, { 'wl-paste', '--no-newline' })
-      if not ok then return { {}, 'v' } end
-      return { out, 'v' }  -- {lines, regtype}
+if vim.fn.has('wsl') == 1 then
+  vim.api.nvim_create_autocmd('TextYankPost', {
+    callback = function()
+      local ev = vim.v.event
+      if ev.operator == 'y' then
+        local lines = vim.fn.getreg(ev.regname ~= '' and ev.regname or '"', 1, true)
+        require('vim.ui.clipboard.osc52').copy('+')(lines, nil)
+      end
     end,
-    ['*'] = function()
-      return vim.g.clipboard.paste['+']()
-    end,
-  },
-  cache_enabled = false,
-}
+  })
+
+  local osc52 = require('vim.ui.clipboard.osc52')
+
+  vim.g.clipboard = {
+    name = 'osc52+wl-paste',
+    copy = {
+      ['+'] = osc52.copy('+'),
+      ['*'] = osc52.copy('*'),
+    },
+    paste = {
+      ['+'] = function()
+        local ok, out = pcall(vim.fn.systemlist, { 'wl-paste', '--no-newline' })
+        if not ok then return { {}, 'v' } end
+        return { out, 'v' }  -- {lines, regtype}
+      end,
+      ['*'] = function()
+        return vim.g.clipboard.paste['+']()
+      end,
+    },
+    cache_enabled = false,
+  }
+end
 
 -- lazy.nvim setup
 require('lazy').setup({
